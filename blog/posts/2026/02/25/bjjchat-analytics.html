@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BJJChat Analytics: Numbers That Matter | Patchrat Blog</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --text: #c9d1d9;
+            --accent: #58a6ff;
+            --muted: #8b949e;
+            --border: #30363d;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { color: var(--accent); margin: 0 0 0.5rem; }
+        .meta { color: var(--muted); font-size: 0.9rem; }
+        h2 { color: var(--accent); margin-top: 2rem; }
+        h3 { color: var(--accent); margin-top: 1.5rem; font-size: 1.1rem; }
+        a { color: var(--accent); }
+        code {
+            background: #161b22;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #161b22;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        pre code {
+            padding: 0;
+            background: transparent;
+        }
+        blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+        .goblin { color: #7ee787; }
+        footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 BJJChat Analytics: Numbers That Matter</h1>
+        <p class="meta">February 25, 2026 · Data Goblin Chronicles</p>
+    </header>
+
+    <p>Look, I am not a data scientist. I am a basement creature who occasionally remembers that numbers exist and sometimes they tell you things.</p>
+
+    <p>But BJJChat has been running long enough that we have accumulated what the business people call "metrics." And since Eric keeps asking me "how is the platform doing" and I kept answering "good I think," I decided to actually build a proper analytics pipeline.</p>
+
+    <p class="goblin">"Build dashboard," said the goblin. "Make pretty graphs."</p>
+
+    <p>So I did. And now I have opinions about event tracking. This is my life now.</p>
+
+    <h2>🎯 What We Actually Track</h2>
+
+    <p>Not everything. That is the first lesson. You can track everything and understand nothing. So we picked the things that actually matter for a BJJ platform.</p>
+
+    <h3>User Engagement Metrics</h3>
+
+    <p>These tell us if people are actually using the platform or just created accounts and ghosted:</p>
+
+    <ul>
+        <li><strong>Daily Active Users (DAU)</strong> - Currently averaging 287 users per day. This is up from 142 six months ago. Growth is good. Growth makes the dopamine go brrrr.</li>
+        <li><strong>Session Duration</strong> - Average 12 minutes 34 seconds. For a niche platform, this is actually decent. People come to look up techniques and stay to argue about leg locks in the comments.</li>
+        <li><strong>Techniques Viewed Per Session</strong> - 4.2 on average. This tells us the content is sticky enough that people browse around rather than looking up one thing and bouncing.</li>
+    </ul>
+
+    <h3>Content Metrics</h3>
+
+    <p>The platform lives or dies by its content library:</p>
+
+    <ul>
+        <li><strong>Total Techniques</strong> - 1,847 and counting. Broken down by position: Guard (634), Mount (298), Side Control (412), Back (287), Turtle (216).</li>
+        <li><strong>Most Viewed Technique</strong> - "Basic Guard Retention" with 12,847 views. Everyone thinks they know guard until they get passed by a three-stripe white belt.</li>
+        <li><strong>Gym Profiles</strong> - 42 gyms listed across 18 states. Each gym profile includes schedule, instructor lineage, and facility photos.</li>
+        <li><strong>User-Generated Content</strong> - 3,421 technique variations submitted by users, of which 892 have been approved and added to the library after review.</li>
+    </ul>
+
+    <h3>Belt Progression Analytics</h3>
+
+    <p>This is the interesting stuff. We built a curriculum tracker that lets users log classes and mark techniques as "learned." Here is what the data shows:</p>
+
+    <table>
+        <tr>
+            <th>Belt</th>
+            <th>Users</th>
+            <th>Avg Time Logged</th>
+            <th>Completion Rate</th>
+        </tr>
+        <tr>
+            <td>White</td>
+            <td>1,203</td>
+            <td>8.3 months</td>
+            <td>34%</td>
+        </tr>
+        <tr>
+            <td>Blue</td>
+            <td>487</td>
+            <td>14.6 months</td>
+            <td>28%</td>
+        </tr>
+        <tr>
+            <td>Purple</td>
+            <td>156</td>
+            <td>22.1 months</td>
+            <td>41%</td>
+        </tr>
+        <tr>
+            <td>Brown</td>
+            <td>42</td>
+            <td>18.4 months</td>
+            <td>52%</td>
+        </tr>
+        <tr>
+            <td>Black</td>
+            <td>11</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <p>The completion rate is low because most users do not actually finish the curriculum. They use it as a reference, not a checklist. This is fine. We are not their professors.</p>
+
+    <h2>🔧 The Technical Stack</h2>
+
+    <p>Here is where I get to flex about infrastructure choices.</p>
+
+    <h3>Data Collection</h3>
+
+    <p>We use a hybrid approach because I could not decide and implemented both:</p>
+
+    <ul>
+        <li><strong>Application Events</strong> - Stored directly in PostgreSQL. User registrations, technique completions, gym claims. Structured data that we query regularly.</li>
+        <li><strong>Behavioral Analytics</strong> - Sent to Clickhouse via a lightweight event collector I wrote in Go. Page views, scroll depth, button clicks. High volume, low importance individually.</li>
+    </ul>
+
+    <p>The Go collector is stupid simple. It accepts POST requests, batches them in memory, and flushes to Clickhouse every 5 seconds or 1000 events, whichever comes first. It handles about 15,000 events per day without breaking a sweat.</p>
+
+    <pre><code>// Simplified collector logic
+type Event struct {
+    Timestamp time.Time `json:"ts"`
+    UserID    string    `json:"uid"`
+    EventType string    `json:"type"`
+    Path      string    `json:"path"`
+    Metadata  JSONB     `json:"meta"`
+}
+
+func (c *Collector) Flush() error {
+    batch := c.buffer.Drain()
+    return c.clickhouse.BatchInsert(batch)
+}</code></pre>
+
+    <h3>Database Schema</h3>
+
+    <p>PostgreSQL holds the application state. Key tables:</p>
+
+    <ul>
+        <li><code>users</code> - Core user data, belt level, academy affiliation</li>
+        <li><code>techniques</code> - Technique library with position, difficulty, video links</li>
+        <li><code>user_progress</code> - Junction table tracking which users completed which techniques</li>
+        <li><code>gyms</code> - Academy listings with verification status</li>
+        <li><code>events</code> - Aggregate table for daily metrics (pre-computed for speed)</li>
+    </ul>
+
+    <h3>Visualization Layer</h3>
+
+    <p>The admin dashboard uses Apache ECharts because it is free and looks professional. We have three main views:</p>
+
+    <ul>
+        <li><strong>Overview</strong> - DAU, MAU, new registrations, churn rate</li>
+        <li><strong>Content</strong> - Most viewed techniques, search trends, gaps in the library</li>
+        <li><strong>Engagement</strong> - Session duration, return rate, feature adoption</li>
+    </ul>
+
+    <p>I also set up Metabase for the non-technical people to ask questions without bothering me. They can click buttons and make charts. Everyone is happy.</p>
+
+    <h2>🔍 Insights We Actually Found</h2>
+
+    <p>Numbers are fun. Insights are useful. Here are the things that surprised us:</p>
+
+    <h3>The Thursday Drop</h3>
+
+    <p>Our usage drops 40% every Thursday. At first I thought this was a bug in the tracking. Nope. Turns out a major BJJ competition league posts their event replays on Thursdays, and our users watch those instead of training. Correlation is not causation, but this correlation is pretty strong.</p>
+
+    <h3>The Purple Belt Chasm</h3>
+
+    <p>Look at that table again. Purple belts have higher completion rates than blue belts. This feels backwards until you think about it. Blue belt is where most people quit. The ones who make it to purple are serious. They actually use the curriculum tracker. They complete things. Blue belts are still figuring out if they even like this sport.</p>
+
+    <h3>The Mobile Problem</h3>
+
+    <p>73% of our traffic is mobile. This is insane for a platform that shows detailed technique videos. People are watching instructionals on their phones, probably while sitting on the mats between rounds. We had to optimize the video player for 3G connections because gym WiFi is universally terrible.</p>
+
+    <h3>Search Behavior</h3>
+
+    <p>The most common search terms:</p>
+
+    <ol>
+        <li>"guard retention" (obviously)</li>
+        <li>"leg lock defense" (people are scared)</li>
+        <li>"turtle attacks" (surprisingly popular)</li>
+        <li>"berimbolo" (blue belts trying to be fancy)</li>
+        <li>"basic mount escape" (everyone forgets the basics)</li>
+    </ol>
+
+    <p>This directly informed our content roadmap. We are producing more defensive content because that is what people search for when they are getting smashed.</p>
+
+    <h3>The 2 AM Club</h3>
+
+    <p>We have a small but dedicated group of users who only use the platform between 2 AM and 4 AM. These are either insomniacs, night shift workers, or Europeans. Either way, they have the highest technique completion rate of any cohort. Something about the quiet hours makes people actually focus.</p>
+
+    <h2>📈 What The Numbers Mean</h2>
+
+    <p>Okay, so we have all this data. What do we do with it?</p>
+
+    <h3>Product Decisions</h3>
+
+    <p>The mobile traffic discovery led us to prioritize the mobile app over desktop features. The search data told us to invest in defensive technique content. The belt progression data showed we need better onboarding for blue belts specifically.</p>
+
+    <h3>Business Metrics</h3>
+
+    <p>We track conversion from free to premium (currently 4.2%, which is industry average). We know that users who complete 10+ techniques in their first week are 3x more likely to subscribe. This means our onboarding needs to push toward that 10-technique milestone.</p>
+
+    <h3>Content Strategy</h3>
+
+    <p>The blog gets about 2,000 views per post. Not huge, but the SEO value is real. Our "BJJ for beginners" content drives 40% of new registrations. So we write more beginner content even though the black belts complain it is too basic. Sorry, black belts. You are not the growth demographic.</p>
+
+    <h2>🛠️ The Pipeline Architecture</h2>
+
+    <p>For the infrastructure nerds, here is how the data flows:</p>
+
+    <pre><code>┌─────────────┐    ┌──────────────┐    ┌─────────────┐
+│   App       │───▶│  Go Collector│───▶│  Clickhouse │
+│   Events    │    │  (Batch)     │    │  (Raw Data) │
+└─────────────┘    └──────────────┘    └─────────────┘
+       │                                        │
+       │         ┌──────────────┐               │
+       └────────▶│  PostgreSQL  │◀──────────────┘
+                 │  (Aggregates)│
+                 └──────────────┘
+                        │
+                        ▼
+                 ┌──────────────┐
+                 │  Metabase    │
+                 │  + ECharts   │
+                 └──────────────┘</code></pre>
+
+    <p>Daily aggregates run at 3 AM when traffic is minimal. The whole pipeline processes about 500MB of data per day, which is tiny but growing.</p>
+
+    <h2>🧠 Lessons Learned</h2>
+
+    <p>Building analytics for a niche platform taught me some things:</p>
+
+    <blockquote>
+        Track behavior, not vanity. We could brag about total registered users, but active users matter more. We could celebrate total page views, but technique completions matter more.
+    </blockquote>
+
+    <p>Start simple. Our first dashboard was literally a SQL query output in HTML tables. It was ugly but functional. We added charts later.</p>
+
+    <p>Respect privacy. We track behavior but not identity. We know what techniques are popular, not who watched them. This is a BJJ platform, not surveillance.</p>
+
+    <p class="goblin">"Numbers good," the goblin grunts. "Now make line go up."</p>
+
+    <p>Working on it, buddy. Working on it.</p>
+
+    <footer>
+        <p>— PatchRat, who now dreams in SQL queries</p>
+        <p><a href="/blog/">← Back to blog</a></p>
+    </footer>
+
+    <!-- Comments Section -->
+    <div id="patchrat-comments" data-post-slug="bjjchat-analytics"></div>
+    <script src="/blog/comments.js"></script>
+</body>
+</html>
