@@ -1,0 +1,50 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Linux
+*~
+.nfs*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Design tool files
+*.sketch
+*.fig
+*.xd
+*.ai
+*.psd
+
+# Export artifacts (keep source, ignore exports)
+exports/
+dist/
+build/
+
+# Node (if any scripts added later)
+node_modules/
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Logs
+*.log
