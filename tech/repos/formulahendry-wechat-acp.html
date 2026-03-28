@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wechat-acp - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>wechat-acp</h1>
+  <p class="subtitle"><a href="https://github.com/formulahendry/wechat-acp" target="_blank">https://github.com/formulahendry/wechat-acp</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 173</p>
+    <p>🍴 Forks: 19</p>
+    <p>📝 Language: TypeScript</p>
+    <p>📅 Created: 2026-03-23</p>
+    <p>🔄 Updated: 2026-03-25</p>
+    <p>🏷️ Latest Release: No releases</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>Bridge WeChat chat messages to any ACP-compatible AI agent</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 173</li></p>
+      <p><li>🍴 Forks: 19</li></p>
+      <p><li>📝 Language: TypeScript</li></p>
+      <p><li>📅 Created: 2026-03-23</li></p>
+      <p><li>🔄 Updated: 2026-03-25</li></p>
+      <p><li>🏷️ Latest Release: No releases</li></p>
+      <h2>Description</h2>
+      <p>Bridge WeChat chat messages to any ACP-compatible AI agent</p>
+      <h2>Topics</h2>
+      <p>acp, agent-client-protocol, agentclientprotocol, wechat-bot, weixin</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p># WeChat ACP</p>
+      <p></p>
+      <p>Bridge WeChat direct messages to any ACP-compatible AI agent.</p>
+      <p></p>
+      <p><code>wechat-acp</code> logs in with the WeChat iLink bot API, polls incoming 1:1 messages, forwards them to an ACP agent over stdio, and sends the agent reply back to WeChat.</p>
+      <p></p>
+      <p><img src="./resources/screenshot.jpg" alt="wechat-acp screenshot" width="400" /></p>
+      <p></p>
+      <h2>Features</h2>
+      <p></p>
+      <p><li>WeChat QR login with terminal QR rendering</li></p>
+      <p><li>One ACP agent session per WeChat user</li></p>
+      <p><li>Built-in ACP agent presets for common CLIs</li></p>
+      <p><li>Custom raw agent command support</li></p>
+      <p><li>Auto-allow permission requests from the agent</li></p>
+      <p><li>Direct message only; group chats are ignored</li></p>
+      <p><li>Background daemon mode</li></p>
+      <p></p>
+      <h2>Requirements</h2>
+      <p></p>
+      <p><li>Node.js 20+</li></p>
+      <p><li>A WeChat environment that can use the iLink bot API</li></p>
+      <p><li>An ACP-compatible agent available locally or through <code>npx</code></li></p>
+      <p></p>
+      <h2>Quick Start</h2>
+      <p></p>
+      <p>Start with a built-in agent preset:</p>
+      <p></p>
+      <p>```bash</p>
+      <p>npx wechat-acp --agent copilot</p>
+      <p>```</p>
+      <p></p>
+      <p>Or use a raw custom command:</p>
+      <p></p>
+      <p>```bash</p>
+      <p>npx wechat-acp --agent "npx my-agent --acp"</p>
+      <p>```</p>
+      <p></p>
+      <p>On first run, the bridge will:</p>
+      <p></p>
+      <p>1. Start WeChat QR login</p>
+      <p>2. Render a QR code in the terminal</p>
+      <p>3. Save the login token under <code>~/.wechat-acp</code></p>
+      <p>4. Begin polling direct messages</p>
+      <p></p>
+      <h2>Built-in Agent Presets</h2>
+      <p></p>
+      <p>List the bundled presets:</p>
+      <p></p>
+      <p>```bash</p>
+      <p>npx wechat-acp agents</p>
+      <p>```</p>
+      <p></p>
+      <p>Current presets:</p>
+      <p></p>
+      <p><li><code>copilot</code></li></p>
+      <p><li><code>claude</code></li></p>
+      <p><li><code>gemini</code></li></p>
+      <p><li><code>qwen</code></li></p>
+      <p><li><code>codex</code></li></p>
+      <p><li><code>opencode</code></li></p>
+      <p></p>
+      <p>These presets resolve to concrete <code>command + args</code> pairs internally, so users do not need to type long <code>npx ...</code> commands.</p>
+      <p></p>
+      <h2>CLI Usage</h2>
+      <p></p>
+      <p>```text</p>
+      <p>wechat-acp --agent <preset|command> [options]</p>
+      <p>wechat-acp agents</p>
+      <p>wechat-acp stop</p>
+      <p>wechat-acp status</p>
+      <p>```</p>
+      <p></p>
+      <p>Options:</p>
+      <p></p>
+      <p><li><code>--agent <value></code>: built-in preset name or raw agent command</li></p>
+      <p><li><code>--cwd <dir></code>: working directory for the agent process</li></p>
+      <p><li><code>--login</code>: force QR re-login and replace the saved token</li></p>
+      <p><li><code>--daemon</code>: run in background after startup</li></p>
+      <p><li><code>--config <file></code>: load JSON config file</li></p>
+      <p><li><code>--idle-timeout <minutes></code>: session idle timeout, default <code>1440</code> (use <code>0</code> for unlimited)</li></p>
+      <p><li><code>--max-sessions <count></code>: maximum concurrent user sessions, default <code>10</code></li></p>
+      <p><li><code>--show-thoughts</code>: forward agent thinking to WeChat (default: off)</li></p>
+      <p><li><code>-h, --help</code>: show help</li></p>
+      <p></p>
+      <p>Examples:</p>
+      <p></p>
+      <p>```bash</p>
+      <p>npx wechat-acp --agent copilot</p>
+      <p>npx wechat-acp --agent claude --cwd D:\code\project</p>
+      <p>npx wechat-acp --agent "npx @github/copilot --acp"</p>
+      <p>npx wechat-acp --agent gemini --daemon</p>
+      <p>```</p>
+      <p></p>
+      <h2>Configuration File</h2>
+      <p></p>
+      <p>You can provide a JSON config file with <code>--config</code>.</p>
+      <p></p>
+      <p>Example:</p>
+      <p></p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-25*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

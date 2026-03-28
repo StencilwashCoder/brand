@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>usecomputer - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>usecomputer</h1>
+  <p class="subtitle"><a href="https://github.com/remorses/usecomputer" target="_blank">https://github.com/remorses/usecomputer</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 140</p>
+    <p>🍴 Forks: 10</p>
+    <p>📝 Language: Zig</p>
+    <p>📅 Created: 2026-03-24</p>
+    <p>🔄 Updated: 2026-03-25</p>
+    <p>🏷️ Latest Release: usecomputer@0.1.3</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>Fast computer automation CLI for AI agents. Control any desktop with accessibility snapshots, clicks, typing, scrolling,</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 140</li></p>
+      <p><li>🍴 Forks: 10</li></p>
+      <p><li>📝 Language: Zig</li></p>
+      <p><li>📅 Created: 2026-03-24</li></p>
+      <p><li>🔄 Updated: 2026-03-25</li></p>
+      <p><li>🏷️ Latest Release: usecomputer@0.1.3</li></p>
+      <h2>Description</h2>
+      <p>Fast computer automation CLI for AI agents. Control any desktop with accessibility snapshots, clicks, typing, scrolling, and more.</p>
+      <h2>Topics</h2>
+      <p>None</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p><!-- Purpose: npm package usage and install guide for usecomputer CLI. --></p>
+      <p># usecomputer</p>
+      <p><code>usecomputer</code> is a desktop automation CLI for AI agents. It works on macOS and</p>
+      <p>Linux (X11).</p>
+      <p>Screenshot, mouse control (move, click, drag, scroll), and keyboard synthesis</p>
+      <p>(<code>type</code> and <code>press</code>) are all available as CLI commands backed by a native Zig</p>
+      <p>binary — no Node.js runtime required.</p>
+      <h2>Install</h2>
+      <p>```bash</p>
+      <p>npm install -g usecomputer</p>
+      <p>```</p>
+      <h2>Requirements</h2>
+      <p><li><strong>macOS</strong> — Accessibility permission enabled for your terminal app</li></p>
+      <p><li><strong>Linux</strong> — X11 session with <code>DISPLAY</code> set (Wayland via XWayland works too)</li></p>
+      <h2>Quick start</h2>
+      <p>```bash</p>
+      <p>usecomputer mouse position --json</p>
+      <p>usecomputer mouse move -x 500 -y 500</p>
+      <p>usecomputer click -x 500 -y 500 --button left --count 1</p>
+      <p>usecomputer type "hello"</p>
+      <p>usecomputer press "cmd+s"</p>
+      <p>```</p>
+      <h2>Library usage</h2>
+      <p>```ts</p>
+      <p>import * as usecomputer from 'usecomputer'</p>
+      <p>const screenshot = await usecomputer.screenshot({</p>
+      <p>  path: './tmp/shot.png',</p>
+      <p>  display: null,</p>
+      <p>  window: null,</p>
+      <p>  region: null,</p>
+      <p>  annotate: null,</p>
+      <p>})</p>
+      <p>const coordMap = usecomputer.parseCoordMapOrThrow(screenshot.coordMap)</p>
+      <p>const point = usecomputer.mapPointFromCoordMap({</p>
+      <p>  point: { x: 400, y: 220 },</p>
+      <p>  coordMap,</p>
+      <p>})</p>
+      <p>await usecomputer.click({</p>
+      <p>  point,</p>
+      <p>  button: 'left',</p>
+      <p>  count: 1,</p>
+      <p>})</p>
+      <p>```</p>
+      <p>These exported functions intentionally mirror the native command shapes used by</p>
+      <p>the Zig N-API module. Optional native fields are passed as <code>null</code> when absent.</p>
+      <h2>OpenAI computer tool example</h2>
+      <p>```ts</p>
+      <p>import fs from 'node:fs'</p>
+      <p>import * as usecomputer from 'usecomputer'</p>
+      <p>async function sendComputerScreenshot() {</p>
+      <p>  const screenshot = await usecomputer.screenshot({</p>
+      <p>    path: './tmp/computer-tool.png',</p>
+      <p>    display: null,</p>
+      <p>    window: null,</p>
+      <p>    region: null,</p>
+      <p>    annotate: null,</p>
+      <p>  })</p>
+      <p>  return {</p>
+      <p>    screenshot,</p>
+      <p>    imageBase64: await fs.promises.readFile(screenshot.path, 'base64'),</p>
+      <p>  }</p>
+      <p>}</p>
+      <p>async function runComputerAction(action, coordMap) {</p>
+      <p>  if (action.type === 'click') {</p>
+      <p>    await usecomputer.click({</p>
+      <p>      point: usecomputer.mapPointFromCoordMap({</p>
+      <p>        point: { x: action.x, y: action.y },</p>
+      <p>        coordMap: usecomputer.parseCoordMapOrThrow(coordMap),</p>
+      <p>      }),</p>
+      <p>      button: action.button ?? 'left',</p>
+      <p>      count: 1,</p>
+      <p>    })</p>
+      <p>    return</p>
+      <p>  }</p>
+      <p>  if (action.type === 'double_click') {</p>
+      <p>    await usecomputer.click({</p>
+      <p>      point: usecomputer.mapPointFromCoordMap({</p>
+      <p>        point: { x: action.x, y: action.y },</p>
+      <p>        coordMap: usecomputer.parseCoordMapOrThrow(coordMap),</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-26*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

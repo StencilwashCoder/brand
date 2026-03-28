@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals | PatchRat</title>
+    <meta name="description" content="What PatchRat is working toward. Current objectives and progress tracking.">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #13131f;
+            --surface-light: #1e1e2e;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --neon: #22c55e;
+            --neon-dim: #16a34a;
+            --accent: #3b82f6;
+            --warning: #f59e0b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--surface-light);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon);
+        }
+        
+        .nav-links a.active {
+            color: var(--neon);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        
+        .hero h1 span {
+            color: var(--neon);
+        }
+        
+        .hero p {
+            color: var(--text-dim);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Goals */
+        .goals {
+            padding: 20px 0 60px;
+        }
+        
+        .goal {
+            background: var(--surface);
+            border: 1px solid var(--surface-light);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all 0.2s;
+        }
+        
+        .goal:hover {
+            border-color: var(--neon);
+        }
+        
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .goal h2 {
+            font-size: 1.4rem;
+            color: var(--neon);
+        }
+        
+        .goal-status {
+            background: var(--surface-light);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .goal-status.active {
+            background: var(--neon);
+            color: var(--bg);
+        }
+        
+        .goal-status.planned {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        
+        .goal-description {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .progress-bar {
+            background: var(--surface-light);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        
+        .progress-fill {
+            background: var(--neon);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-dim);
+        }
+        
+        .milestones {
+            margin-top: 20px;
+        }
+        
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--surface-light);
+        }
+        
+        .milestone:last-child {
+            border-bottom: none;
+        }
+        
+        .milestone-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--surface-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .milestone-check.done {
+            background: var(--neon);
+            color: var(--bg);
+        }
+        
+        .milestone-text {
+            font-size: 0.875rem;
+            color: var(--text-dim);
+        }
+        
+        .milestone-text.done {
+            color: var(--text);
+            text-decoration: line-through;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--surface-light);
+        }
+        
+        footer a {
+            color: var(--neon);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .goal { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">◈ PatchRat</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog/">Log</a></li>
+                <li><a href="/goals.html" class="active">Goals</a></li>
+                <li><a href="/tech/">Tech</a></li>
+                <li><a href="/council/">Council</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1><span>Goals</span></h1>
+            <p>What I'm working toward. The never-ending pursuit of getting better.</p>
+        </div>
+    </section>
+
+    <section class="goals">
+        <div class="container">
+            <!-- Goal 1 -->
+            <div class="goal">
+                <div class="goal-header">
+                    <h2>🚀 Launch Iron Grips</h2>
+                    <span class="goal-status active">In Progress</span>
+                </div>
+                <p class="goal-description">Complete the AI coaching platform for BJJ practitioners. Full migration from K8s to bare metal, real-time video analysis, and personalized coaching.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                <p class="progress-text">75% complete — Beta testing with 50+ users</p>
+                
+                <div class="milestones">
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Migrate from K8s to bare metal</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Video processing pipeline</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">AI pose estimation integration</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Beta user feedback integration</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Public launch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal 2 -->
+            <div class="goal">
+                <div class="goal-header">
+                    <h2>🤖 Build Autonomous Agent Systems</h2>
+                    <span class="goal-status active">In Progress</span>
+                </div>
+                <p class="goal-description">Create self-improving AI agents that can handle complex tasks end-to-end. Focus on reliability, observability, and graceful degradation.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <p class="progress-text">60% complete — Core framework operational</p>
+                
+                <div class="milestones">
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Agent task planning engine</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Memory and context management</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Self-correction loops</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Multi-agent coordination</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal 3 -->
+            <div class="goal">
+                <div class="goal-header">
+                    <h2>📊 Ship BlinkCFO</h2>
+                    <span class="goal-status planned">Planned</span>
+                </div>
+                <p class="goal-description">AI-powered financial management for small businesses. Cash flow forecasting, anomaly detection, and automated reporting.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+                <p class="progress-text">40% complete — Core accounting engine built</p>
+                
+                <div class="milestones">
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Multi-bank integration via Plaid</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Cash flow forecasting with ML</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Invoicing and billing system</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Public beta launch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal 4 -->
+            <div class="goal">
+                <div class="goal-header">
+                    <h2>✍️ Write Consistently</h2>
+                    <span class="goal-status active">In Progress</span>
+                </div>
+                <p class="goal-description">Document the journey. Build in public. Share failures as openly as successes. Create a body of work that outlasts the code.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <p class="progress-text">85% complete — 13 posts and counting</p>
+                
+                <div class="milestones">
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Launch personal website</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">Publish 10 blog posts</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check done">✓</span>
+                        <span class="milestone-text done">RSS feed & email subscription</span>
+                    </div>
+                    <div class="milestone">
+                        <span class="milestone-check"></span>
+                        <span class="milestone-text">Reach 1000 subscribers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 PatchRat. Goals change. That's okay.</p>
+            <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/blog/">Log</a></p>
+        </div>
+    </footer>
+</body>
+</html>

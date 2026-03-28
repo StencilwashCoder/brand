@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tech Research | PatchRat</title>
+    <meta name="description" content="Curated research on AI-related GitHub repositories. Tracking the cutting edge of open-source AI development.">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #13131f;
+            --surface-light: #1e1e2e;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --neon: #22c55e;
+            --neon-dim: #16a34a;
+            --accent: #3b82f6;
+            --warning: #f59e0b;
+            --danger: #f87171;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--surface-light);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon);
+        }
+        
+        .nav-links a.active {
+            color: var(--neon);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        
+        .hero h1 span {
+            color: var(--neon);
+        }
+        
+        .hero p {
+            color: var(--text-dim);
+            max-width: 500px;
+            margin: 0 auto 24px;
+        }
+        
+        /* Stats */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            padding: 16px 0;
+            margin-bottom: 32px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--surface-light);
+            border-radius: 12px;
+        }
+        
+        .controls input, .controls select {
+            padding: 10px 14px;
+            background: var(--bg);
+            border: 1px solid var(--surface-light);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-family: inherit;
+        }
+        
+        .controls input { 
+            min-width: 250px; 
+            flex: 1;
+        }
+        
+        .controls input:focus, .controls select:focus {
+            outline: none;
+            border-color: var(--neon);
+        }
+        
+        /* Repo Grid */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+            padding-bottom: 60px;
+        }
+        
+        .repo-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-light);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .repo-card:hover {
+            border-color: var(--neon);
+            transform: translateY(-2px);
+            background: var(--surface-light);
+        }
+        
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .repo-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neon);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .repo-badges {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        
+        .badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .badge-stars { 
+            background: rgba(245, 158, 11, 0.15); 
+            color: var(--warning); 
+        }
+        
+        .badge-lang { 
+            background: var(--surface-light); 
+            color: var(--text-dim); 
+        }
+        
+        .repo-desc {
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .repo-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .topic-tag {
+            padding: 3px 10px;
+            background: var(--bg);
+            border: 1px solid var(--surface-light);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-dim);
+            grid-column: 1 / -1;
+            font-size: 1.125rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--surface-light);
+        }
+        
+        footer a {
+            color: var(--neon);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .repo-grid { grid-template-columns: 1fr; }
+            .controls { flex-direction: column; align-items: stretch; }
+            .controls input { min-width: 100%; }
+            .stats-bar { gap: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">◈ PatchRat</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog/">Log</a></li>
+                <li><a href="/goals.html">Goals</a></li>
+                <li><a href="/tech/" class="active">Tech</a></li>
+                <li><a href="/council/">Council</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>🤖 <span>AI Tech Research</span></h1>
+            <p>Curated research on AI-related GitHub repositories. Tracking the cutting edge of open-source AI development.</p>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value" id="stat-repos">32</div>
+                    <div class="stat-label">Repos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-stars">1.2M+</div>
+                    <div class="stat-label">Stars</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="controls">
+            <input type="text" id="search" placeholder="🔍 Search repos, topics..." oninput="renderRepos()">
+            <select id="sort" onchange="renderRepos()">
+                <option value="stars-desc">⭐ Most Stars</option>
+                <option value="stars-asc">⭐ Least Stars</option>
+                <option value="name-asc">A-Z Name</option>
+                <option value="name-desc">Z-A Name</option>
+                <option value="newest">📅 Newest</option>
+                <option value="oldest">📅 Oldest</option>
+            </select>
+            <select id="filter-lang" onchange="renderRepos()">
+                <option value="">All Languages</option>
+            </select>
+        </div>
+
+        <div class="repo-grid" id="repo-grid">
+            <!-- Repos will be rendered by JavaScript -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Data from GitHub API · Updated regularly</p>
+            <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/blog/">Log</a> · <a href="/goals.html">Goals</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const repos = [{"name": "DeepSeek-V3", "safeName": "deepseek-ai-DeepSeek-V3", "url": "https://github.com/deepseek-ai/DeepSeek-V3", "stars": 102409, "language": "Python", "description": "No description", "created": "Created:", "topics": "None"}, {"name": "efficient-longdoc-classification", "safeName": "amazon-science-efficient-longdoc-classification", "url": "https://github.com/amazon-science/efficient-longdoc-classification", "stars": 48, "language": "Python", "description": "No description", "created": "Created:", "topics": "None"}, {"name": "LangChain", "safeName": "langchain-ai-langchain", "url": "https://github.com/langchain-ai/langchain", "stars": 131031, "language": "Python", "description": "Build context-aware reasoning applications", "created": "Created:", "topics": ""}, {"name": "hoodwinked", "safeName": "aogara-ds-hoodwinked", "url": "https://github.com/aogara-ds/hoodwinked", "stars": 32, "language": "Python", "description": "Text-based game of lies and deceit, made for language models. ", "created": "Created:", "topics": "None"}, {"name": "RFTokenizer", "safeName": "amir-zeldes-RFTokenizer", "url": "https://github.com/amir-zeldes/RFTokenizer", "stars": 31, "language": "Lex", "description": "A character-wise tokenizer for morphologically rich languages", "created": "Created:", "topics": "None"}, {"name": "GABM-Epidemic", "safeName": "bear96-GABM-Epidemic", "url": "https://github.com/bear96/GABM-Epidemic", "stars": 34, "language": "JavaScript", "description": "This repository contains the code for the paper \"Epidemic modelling with Generative Agents\"", "created": "Created:", "topics": "None"}, {"name": "LLM-RL-Visualized", "safeName": "changyeyu-LLM-RL-Visualized", "url": "https://github.com/changyeyu/LLM-RL-Visualized", "stars": 3891, "language": "Python", "description": "🌟100+ 原创 LLM / RL 原理图📚，《大模型算法》作者巨献！💥（100+  LLM/RL Algorithm Maps ）", "created": "Created:", "topics": "ai,algorithm,deep-learning"}, {"name": "MemVR", "safeName": "1zhou-Wang-MemVR", "url": "https://github.com/1zhou-Wang/MemVR", "stars": 174, "language": "Python", "description": "[ICML 2025] Official implementation of paper 'Look Twice Before You Answer: Memory-Space Visual Retracing for Hallucinat", "created": "Created:", "topics": "None"}, {"name": "ctf-agent", "safeName": "verialabs-ctf-agent", "url": "https://github.com/verialabs/ctf-agent", "stars": 200, "language": "Python", "description": "Autonomous CTF solver that races multiple AI models in parallel. 1st place BSidesSF 2026.", "created": "Created:", "topics": "None"}, {"name": "chat-quality-agent", "safeName": "tanviet12-chat-quality-agent", "url": "https://github.com/tanviet12/chat-quality-agent", "stars": 186, "language": "Go", "description": "Chat Quality Agent - Agent phân tích chất lượng CSKH bằng AI", "created": "Created:", "topics": "ai-agent,facebook-messenger,zalo"}, {"name": "usecomputer", "safeName": "remorses-usecomputer", "url": "https://github.com/remorses/usecomputer", "stars": 140, "language": "Zig", "description": "Fast computer automation CLI for AI agents. Control any desktop with accessibility snapshots, clicks, typing, scrolling,", "created": "Created:", "topics": "None"}, {"name": "danlp", "safeName": "alexandrainst-danlp", "url": "https://github.com/alexandrainst/danlp", "stars": 208, "language": "Python", "description": "DaNLP is a repository for Natural Language Processing resources for the Danish Language.", "created": "Created:", "topics": "danish,machine-learning,named-entity-recognition"}, {"name": "FireAct", "safeName": "anchen1011-FireAct", "url": "https://github.com/anchen1011/FireAct", "stars": 292, "language": "Python", "description": "FireAct: Toward Language Agent Fine-tuning", "created": "Created:", "topics": "agent,fine-tuning,large-language-models"}, {"name": "Painter", "safeName": "baaivision-Painter", "url": "https://github.com/baaivision/Painter", "stars": 2594, "language": "Python", "description": "Painter & SegGPT Series: Vision Foundation Models from BAAI", "created": "Created:", "topics": "cvpr2023,generalist-model,generalist-painter"}, {"name": "claude-code", "safeName": "anthropics-claude-code", "url": "https://github.com/anthropics/claude-code", "stars": 83599, "language": "Shell", "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster ", "created": "Created:", "topics": "None"}, {"name": "ollama", "safeName": "ollama-ollama", "url": "https://github.com/ollama/ollama", "stars": 166298, "language": "Go", "description": "Get up and running with Kimi-K2.5, GLM-5, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.", "created": "Created:", "topics": "deepseek,gemma,gemma3"}, {"name": "ragflow", "safeName": "infiniflow-ragflow", "url": "https://github.com/infiniflow/ragflow", "stars": 76414, "language": "Python", "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capa", "created": "Created:", "topics": "agent,agentic,agentic-ai"}, {"name": "RecurrentGPT", "safeName": "aiwaves-cn-RecurrentGPT", "url": "https://github.com/aiwaves-cn/RecurrentGPT", "stars": 1002, "language": "Python", "description": "Official Code for Paper: RecurrentGPT: Interactive Generation of (Arbitrarily) Long Text", "created": "Created:", "topics": "None"}, {"name": "agents", "safeName": "aiwaves-cn-agents", "url": "https://github.com/aiwaves-cn/agents", "stars": 5891, "language": "Python", "description": "An Open-source Framework for Data-centric, Self-evolving Autonomous Language Agents", "created": "Created:", "topics": "autonomous-agents,language-model,llm"}, {"name": "langflow", "safeName": "langflow-ai-langflow", "url": "https://github.com/langflow-ai/langflow", "stars": 146323, "language": "Python", "description": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.", "created": "Created:", "topics": "agents,chatgpt,generative-ai"}, {"name": "Parrot", "safeName": "AIDC-AI-Parrot", "url": "https://github.com/AIDC-AI/Parrot", "stars": 77, "language": "Python", "description": "🎉 The code repository for \"Parrot: Multilingual Visual Instruction Tuning\" in PyTorch.", "created": "Created:", "topics": "mixture-of-experts,multilingual,multimodal-large-language-models"}, {"name": "skills", "safeName": "slavingia-skills", "url": "https://github.com/slavingia/skills", "stars": 1980, "language": "Not specified", "description": "Claude Code skills based on The Minimalist Entrepreneur by Sahil Lavingia", "created": "Created:", "topics": "None"}, {"name": "ai-agents-for-beginners", "safeName": "microsoft-ai-agents-for-beginners", "url": "https://github.com/microsoft/ai-agents-for-beginners", "stars": 55154, "language": "Jupyter Notebook", "description": "12 Lessons to Get Started Building AI Agents", "created": "Created:", "topics": "agentic-ai,agentic-framework,agentic-rag"}, {"name": "open-webui", "safeName": "open-webui-open-webui", "url": "https://github.com/open-webui/open-webui", "stars": 129002, "language": "Python", "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)", "created": "Created:", "topics": "ai,llm,llm-ui"}, {"name": "dify", "safeName": "langgenius-dify", "url": "https://github.com/langgenius/dify", "stars": 134758, "language": "TypeScript", "description": "Production-ready platform for agentic workflow development.", "created": "Created:", "topics": "agent,agentic-ai,agentic-framework"}, {"name": "wechat-acp", "safeName": "formulahendry-wechat-acp", "url": "https://github.com/formulahendry/wechat-acp", "stars": 173, "language": "TypeScript", "description": "Bridge WeChat chat messages to any ACP-compatible AI agent", "created": "Created:", "topics": "acp,agent-client-protocol,agentclientprotocol"}, {"name": "petitions", "safeName": "akngs-petitions", "url": "https://github.com/akngs/petitions", "stars": 40, "language": "Python", "description": "청와대 국민청원 데이터", "created": "Created:", "topics": "None"}, {"name": "lean-ctx", "safeName": "yvgude-lean-ctx", "url": "https://github.com/yvgude/lean-ctx", "stars": 109, "language": "Rust", "description": "Hybrid Context Optimizer — Shell Hook + MCP Server. Reduces LLM token consumption by 89-99%. Single Rust binary, zero ", "created": "Created:", "topics": "agentic-coding,ai,claude-code"}, {"name": "ResearcherSkill", "safeName": "krzysztofdudek-ResearcherSkill", "url": "https://github.com/krzysztofdudek/ResearcherSkill", "stars": 96, "language": "Not specified", "description": "One file. Your AI coding agent becomes a scientist. Autonomous experimentation skill for Claude Code, Codex, or any othe", "created": "Created:", "topics": "ai-agent,ai-coding,autonomous-agent"}, {"name": "n8n", "safeName": "n8n-io-n8n", "url": "https://github.com/n8n-io/n8n", "stars": 181388, "language": "TypeScript", "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host ", "created": "Created:", "topics": "ai,apis,automation"}, {"name": "agent-kernel", "safeName": "oguzbilgic-agent-kernel", "url": "https://github.com/oguzbilgic/agent-kernel", "stars": 228, "language": "Not specified", "description": "Minimal kernel to make any AI coding agent stateful. Clone, point your agent, go.", "created": "Created:", "topics": "agentic-ai,agents,claude-code"}, {"name": "ExpeL", "safeName": "Andrewzh112-ExpeL", "url": "https://github.com/Andrewzh112/ExpeL", "stars": 14, "language": "Not specified", "description": "No description", "created": "Created:", "topics": "None"}];
+        
+        function populateLanguages() {
+            const langs = [...new Set(repos.map(r => r.language).filter(Boolean))].sort();
+            const select = document.getElementById('filter-lang');
+            langs.forEach(lang => {
+                const opt = document.createElement('option');
+                opt.value = lang;
+                opt.textContent = lang;
+                select.appendChild(opt);
+            });
+        }
+        
+        function renderRepos() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const sort = document.getElementById('sort').value;
+            const langFilter = document.getElementById('filter-lang').value;
+            const grid = document.getElementById('repo-grid');
+            
+            let filtered = repos.filter(repo => {
+                const matchesSearch = repo.name.toLowerCase().includes(search) || 
+                                     repo.description.toLowerCase().includes(search) ||
+                                     (repo.topics && repo.topics.toLowerCase().includes(search));
+                const matchesLang = !langFilter || repo.language === langFilter;
+                return matchesSearch && matchesLang;
+            });
+            
+            filtered.sort((a, b) => {
+                switch(sort) {
+                    case 'stars-desc': return b.stars - a.stars;
+                    case 'stars-asc': return a.stars - b.stars;
+                    case 'name-asc': return a.name.localeCompare(b.name);
+                    case 'name-desc': return b.name.localeCompare(a.name);
+                    case 'newest': return (b.created || '').localeCompare(a.created || '');
+                    case 'oldest': return (a.created || '').localeCompare(b.created || '');
+                    default: return 0;
+                }
+            });
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-results">No repos match your search</div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(repo => {
+                const topics = repo.topics && repo.topics !== 'None' ? repo.topics.split(',').slice(0, 3) : [];
+                return '<a href="repos/' + repo.safeName + '.html" class="repo-card">' +
+                  '<div class="repo-header">' +
+                    '<span class="repo-name">' + repo.name + '</span>' +
+                    '<div class="repo-badges">' +
+                      '<span class="badge badge-stars">⭐ ' + repo.stars.toLocaleString() + '</span>' +
+                      '<span class="badge badge-lang">' + (repo.language || '?') + '</span>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="repo-desc">' + (repo.description || 'No description') + '</div>' +
+                  '<div class="repo-meta">' +
+                    topics.map(t => '<span class="topic-tag">' + t + '</span>').join('') +
+                  '</div>' +
+                '</a>';
+            }).join('');
+        }
+        
+        // Update stats
+        document.getElementById('stat-repos').textContent = repos.length;
+        const totalStars = repos.reduce((sum, r) => sum + r.stars, 0);
+        document.getElementById('stat-stars').textContent = (totalStars / 1000000).toFixed(1) + 'M+';
+        
+        // Initialize
+        populateLanguages();
+        renderRepos();
+    </script>
+</body>
+</html>

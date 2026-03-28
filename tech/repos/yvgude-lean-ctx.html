@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lean-ctx - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>lean-ctx</h1>
+  <p class="subtitle"><a href="https://github.com/yvgude/lean-ctx" target="_blank">https://github.com/yvgude/lean-ctx</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 109</p>
+    <p>🍴 Forks: 18</p>
+    <p>📝 Language: Rust</p>
+    <p>📅 Created: 2026-03-23</p>
+    <p>🔄 Updated: 2026-03-25</p>
+    <p>🏷️ Latest Release: v2.0.0</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>Hybrid Context Optimizer — Shell Hook + MCP Server. Reduces LLM token consumption by 89-99%. Single Rust binary, zero </p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 109</li></p>
+      <p><li>🍴 Forks: 18</li></p>
+      <p><li>📝 Language: Rust</li></p>
+      <p><li>📅 Created: 2026-03-23</li></p>
+      <p><li>🔄 Updated: 2026-03-25</li></p>
+      <p><li>🏷️ Latest Release: v2.0.0</li></p>
+      <h2>Description</h2>
+      <p>Hybrid Context Optimizer — Shell Hook + MCP Server. Reduces LLM token consumption by 89-99%. Single Rust binary, zero dependencies.</p>
+      <h2>Topics</h2>
+      <p>agentic-coding, ai, claude-code, cli, compression, context-compression, copilot, cursor, developer-tools, llm, mcp, open-source, rust, token-optimization, tokens</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p># lean-ctx</p>
+      <p><strong>Context Intelligence Engine with CCP + TDD. Shell Hook + MCP Server. 21 MCP tools, 90+ shell patterns, cross-session memory (CCP), LITM-aware positioning, tree-sitter AST for 14 languages. Single Rust binary.</strong></p>
+      <p>[![Crates.io](https://img.shields.io/crates/v/lean-ctx)](https://crates.io/crates/lean-ctx)</p>
+      <p>[![Downloads](https://img.shields.io/crates/d/lean-ctx)](https://crates.io/crates/lean-ctx)</p>
+      <p>[![AUR](https://img.shields.io/aur/version/lean-ctx)](https://aur.archlinux.org/packages/lean-ctx)</p>
+      <p>[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)</p>
+      <p>[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/pTHkG9Hew9)</p>
+      <p>[Website](https://leanctx.com) · [Install](#installation) · [Quick Start](#quick-start) · [CLI Reference](#cli-commands) · [MCP Tools](#21-mcp-tools) · [Changelog](CHANGELOG.md) · [vs RTK](#lean-ctx-vs-rtk) · [Discord](https://discord.gg/pTHkG9Hew9)</p>
+      <p>---</p>
+      <p>lean-ctx reduces LLM token consumption by <strong>up to 99%</strong> through two complementary strategies in a single binary:</p>
+      <p>1. <strong>Shell Hook</strong> — Transparently compresses CLI output (90+ patterns) before it reaches the LLM. Works without LLM cooperation.</p>
+      <p>2. <strong>MCP Server</strong> — 21 tools for cached file reads, adaptive mode selection, incremental deltas, dependency maps, intent detection, cross-file dedup, project graph, cross-session memory (CCP), and session metrics. Works with Cursor, GitHub Copilot, Claude Code, Windsurf, OpenAI Codex, Google Antigravity, OpenCode, and any MCP-compatible editor.</p>
+      <p>3. <strong>AI Tool Hooks</strong> — One-command integration for Claude Code, Cursor, Gemini CLI, Codex, Windsurf, and Cline via <code>lean-ctx init --agent <tool></code>.</p>
+      <h2>Token Savings (Typical Cursor/Claude Code Session)</h2>
+      <p>| Operation | Frequency | Standard | lean-ctx | Savings |</p>
+      <p>|---|---|---|---|---|</p>
+      <p>| File reads (cached) | 15x | 30,000 | 195 | <strong>-99%</strong> |</p>
+      <p>| File reads (map mode) | 10x | 20,000 | 2,000 | <strong>-90%</strong> |</p>
+      <p>| ls / find | 8x | 6,400 | 1,280 | <strong>-80%</strong> |</p>
+      <p>| git status/log/diff | 10x | 8,000 | 2,400 | <strong>-70%</strong> |</p>
+      <p>| grep / rg | 5x | 8,000 | 2,400 | <strong>-70%</strong> |</p>
+      <p>| cargo/npm build | 5x | 5,000 | 1,000 | <strong>-80%</strong> |</p>
+      <p>| Test runners | 4x | 10,000 | 1,000 | <strong>-90%</strong> |</p>
+      <p>| curl (JSON) | 3x | 1,500 | 165 | <strong>-89%</strong> |</p>
+      <p>| docker ps/build | 3x | 900 | 180 | <strong>-80%</strong> |</p>
+      <p>| <strong>Total</strong> | | <strong>~89,800</strong> | <strong>~10,620</strong> | <strong>-88%</strong> |</p>
+      <p>> Estimates based on medium-sized TypeScript/Rust projects. MCP cache hits reduce re-reads to ~13 tokens each.</p>
+      <h2>Installation</h2>
+      <h3>Homebrew (macOS / Linux)</h3>
+      <p>```bash</p>
+      <p>brew tap yvgude/lean-ctx</p>
+      <p>brew install lean-ctx</p>
+      <p>```</p>
+      <h3>Arch Linux (AUR)</h3>
+      <p>```bash</p>
+      <p>yay -S lean-ctx        # builds from source (crates.io)</p>
+      <p># or</p>
+      <p>yay -S lean-ctx-bin    # pre-built binary (GitHub Releases)</p>
+      <p>```</p>
+      <h3>Cargo</h3>
+      <p>```bash</p>
+      <p>cargo install lean-ctx</p>
+      <p>```</p>
+      <h3>Build from Source</h3>
+      <p>```bash</p>
+      <p>git clone https://github.com/yvgude/lean-ctx.git</p>
+      <p>cd lean-ctx/rust</p>
+      <p>cargo build --release</p>
+      <p>cp target/release/lean-ctx ~/.local/bin/</p>
+      <p>```</p>
+      <p>> Add <code>~/.local/bin</code> to your PATH if needed:</p>
+      <p>> ```bash</p>
+      <p>> echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc  # or ~/.bashrc</p>
+      <p>> ```</p>
+      <h3>Verify Installation</h3>
+      <p>```bash</p>
+      <p>lean-ctx --version   # Should show "lean-ctx 2.0.0"</p>
+      <p>lean-ctx gain        # Should show token savings stats</p>
+      <p>```</p>
+      <h2>Token Dense Dialect (TDD)</h2>
+      <p>lean-ctx introduces <strong>TDD mode</strong> — enabled by default. TDD compresses LLM communication using mathematical symbols and short identifiers:</p>
+      <p>| Symbol | Meaning |</p>
+      <p>|---|---|</p>
+      <p>| <code>λ</code> | function/handler |</p>
+      <p>| <code>§</code> | struct/class/module |</p>
+      <p>| <code>∂</code> | interface/trait |</p>
+      <p>| <code>τ</code> | type alias |</p>
+      <p>| <code>ε</code> | enum |</p>
+      <p>| <code>α1, α2...</code> | short identifier IDs |</p>
+      <p><strong>How it works:</strong></p>
+      <p><li>Signatures use compact notation: <code>λ+handle(⊕,path:s)→s</code> instead of <code>fn pub async handle(&self, path: String) -> String</code></li></p>
+      <p><li>Long identifiers (>12 chars) are mapped to <code>α1, α2...</code> with a <code>§MAP</code> at the end</li></p>
+      <p><li>MCP instructions tell the LLM to respond in Token Dense Dialect — shorter responses, less thinking tokens</li></p>
+      <p><strong>Result</strong>: 8-25% additional savings on top of existing compression.</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-25*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

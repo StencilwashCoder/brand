@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MemVR - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>MemVR</h1>
+  <p class="subtitle"><a href="https://github.com/1zhou-Wang/MemVR" target="_blank">https://github.com/1zhou-Wang/MemVR</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 174</p>
+    <p>🍴 Forks: 4</p>
+    <p>📝 Language: Python</p>
+    <p>📅 Created: 2024-09-26</p>
+    <p>🔄 Updated: 2026-03-24</p>
+    <p>🏷️ Latest Release: No releases</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>[ICML 2025] Official implementation of paper 'Look Twice Before You Answer: Memory-Space Visual Retracing for Hallucinat</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 174</li></p>
+      <p><li>🍴 Forks: 4</li></p>
+      <p><li>📝 Language: Python</li></p>
+      <p><li>📅 Created: 2024-09-26</li></p>
+      <p><li>🔄 Updated: 2026-03-24</li></p>
+      <p><li>🏷️ Latest Release: No releases</li></p>
+      <h2>Description</h2>
+      <p>[ICML 2025] Official implementation of paper 'Look Twice Before You Answer: Memory-Space Visual Retracing for Hallucination Mitigation in Multimodal Large Language Models'.</p>
+      <h2>Topics</h2>
+      <p>None</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p><div align=center></p>
+      <p><img src="assets/memvrlogo.png" width="180px"></p>
+      <p></div> </p>
+      <h2 align="center">
+      <a href="https://arxiv.org/abs/2410.03577">Look Twice Before You Answer: Memory-Space Visual Retracing for Hallucination Mitigation in Multimodal Large Language Models
+      <p></a></h2></p>
+      <p>    </p>
+      <h5 align="center"> If you like our project, please give us a star ⭐ on GitHub for the latest update.</h5>
+      <h5 align=center>
+      <p>[![Post](https://img.shields.io/badge/📚-PaperWeekly-informational)](https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/147998192) </p>
+      <p>[![arXiv](https://img.shields.io/badge/Arixv-2410.03577-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2410.03577)</p>
+      <p>[![License](https://img.shields.io/badge/License-Apache2.0-yellow)](https://github.com/PKU-YuanGroup/Chat-UniVi/blob/main/LICENSE)  </p>
+      <p></h5></p>
+      <h2>📣 News</h2>
+      <p>* <strong>[2024/10/23]</strong>  🚀 Source code released! We're now working on extending MemVR to more MLLMs.</p>
+      <p>* <strong>[2025/05/01]</strong>  🎉🎉🎉 MemVR has been accepted by ICML 2025. See you in Vancouver, Canada! </p>
+      <p>![MemVR](assets/Poster.png) </p>
+      <h2>🎯 Overview</h2>
+      <p>We propose Memory-Space Visual Retracing (MemVR), a novel hallucination mitigation paradigm without needing external knowledge retrieval or additional fine-tuning. MemVR has two significant advantages:</p>
+      <p>* First, MemVR significantly mitigates hallucination issues across various MLLMs and excels in general benchmarks, emphasizing its potential for widespread applicability.</p>
+      <p>* Second, MemVR is a plug-and-play solution without incurring added time overhead.</p>
+      <p>![MemVR](assets/fig1.png)</p>
+      <p>![MemVR](assets/infracom.png)</p>
+      <p>![MemVR](assets/figexp.png)</p>
+      <p>![MemVR](assets/caseA.png)</p>
+      <p>![MemVR](assets/longcase.png)</p>
+      <p>Comprehensive experimental evaluations demonstrate that MemVR significantly mitigates hallucination issues across various MLLMs and excels in general benchmarks without incurring added time overhead. More results in the paper.</p>
+      <h2>🕹️ Usage</h2>
+      <h3>Installation</h3>
+      <p>1. We recommend you use [LLaVA](https://github.com/haotian-liu/LLaVA) as the working environment. Please clone the repository from [LLaVA](https://github.com/haotian-liu/LLaVA) and set up the environment by running</p>
+      <p>```</p>
+      <p>git clone https://github.com/haotian-liu/LLaVA</p>
+      <p>cd LLaVA</p>
+      <p>conda create -n memvr python==3.10</p>
+      <p>conda activate memvr</p>
+      <p>pip install --upgrade pip</p>
+      <p>pip install -e .</p>
+      <p>```</p>
+      <p>Then after setting up environment for LLaVA, update the _transformers_ lib to 4.40.0:</p>
+      <p>```</p>
+      <p>pip install transformers==4.40.0</p>
+      <p>```</p>
+      <p>Please note that due to the change of _transformers_ lib, you need to modify the _<strong>forward()</strong>_ function defined at [llava_llama.py](https://github.com/haotian-liu/LLaVA/blob/main/llava/model/language_model/llava_llama.py), line 70. Add _cache_position=None_ to it. </p>
+      <p>We also provide a modified version of file [here](https://github.com/1zhou-Wang/MemVR/blob/main/llava_llama.py), that you can replace the original _llava_llama.py_ with this one. _llava_llama.py_ is at </p>
+      <p>```</p>
+      <p>LLaVA/llava/model/language_model/llava_llama.py</p>
+      <p>```</p>
+      <p>2. After setting up, clone the repository from [MemVR](https://github.com/1zhou-Wang/MemVR) and move all contents to the main directory of LLaVA (except README.md).</p>
+      <p>```bash</p>
+      <p>LLaVA/</p>
+      <p>├── llava/</p>
+      <p>│ ├── eval/ # merge here in the next step</p>
+      <p>│ ├── .../</p>
+      <p>├── eval_scripts/</p>
+      <p>│ ├── llava/</p>
+      <p>│ ├── qwen/</p>
+      <p>│ ├── glm/</p>
+      <p>├── memvr.py/</p>
+      <p>├── inference.py/</p>
+      <p>├── images/</p>
+      <p>│ ├── ...</p>
+      <p>└── ...</p>
+      <p>```</p>
+      <p>Then merge the file [eval](https://github.com/1zhou-Wang/MemVR/tree/main/eval) to the directory </p>
+      <p>```</p>
+      <p>/LLaVA/llava/eval/</p>
+      <p>```</p>
+      <h3>Downloading Checkpoints</h3>
+      <p>Under the main directory of LLaVA:</p>
+      <p>1. Download the checkpoint of LLaVA v1.5 [here](https://huggingface.co/liuhaotian/llava-v1.5-7b).</p>
+      <p>2. Download the checkpoint of Qwen-VL-Chat [here](https://huggingface.co/Qwen/Qwen-VL-Chat). Replace the downloaded 'modeling_qwen.py' by [modeling_qwen.py](https://github.com/1zhou-Wang/MemVR/blob/main/modeling/modeling_qwen.py) to enable MemVR on Qwen-VL-Chat model.</p>
+      <p>3. Download the checkpoint of glm-4v-9b [here](https://huggingface.co/THUDM/glm-4v-9b). Replace the downloaded 'modeling_chatglm.py' by [modeling_chatglm.py](https://github.com/1zhou-Wang/MemVR/blob/main/modeling/modeling_chatglm.py) to enable MemVR on GLM-4V-9b model.</p>
+      <p>You may check if your environment works fine by running</p>
+      <p>```</p>
+      <p>python inference.py</p>
+      <p>```</p>
+      <h3>Evaluation</h3>
+      <p>Follow [Evaluation.md](https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md) in [LLaVA](https://github.com/haotian-liu/LLaVA) to prepare for the benchmark materials. Additionally, we recommend you use GPUs with no less than 40GB of VRAM.</p>
+      <p>Test with these benchmarks by running</p>
+      <p>```</p>
+      <p>bash eval_scripts/llava/mme.sh </p>
+      <p>```</p>
+      <p>Please note that you may need to fill in your own OpenAI API-KEY for GPT-based evaluations like llavabench or MM-Vet.</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-28*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

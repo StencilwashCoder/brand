@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chat-quality-agent - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>chat-quality-agent</h1>
+  <p class="subtitle"><a href="https://github.com/tanviet12/chat-quality-agent" target="_blank">https://github.com/tanviet12/chat-quality-agent</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 186</p>
+    <p>🍴 Forks: 185</p>
+    <p>📝 Language: Go</p>
+    <p>📅 Created: 2026-03-23</p>
+    <p>🔄 Updated: 2026-03-25</p>
+    <p>🏷️ Latest Release: v2026.03.25.16</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>Chat Quality Agent - Agent phân tích chất lượng CSKH bằng AI</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 186</li></p>
+      <p><li>🍴 Forks: 185</li></p>
+      <p><li>📝 Language: Go</li></p>
+      <p><li>📅 Created: 2026-03-23</li></p>
+      <p><li>🔄 Updated: 2026-03-25</li></p>
+      <p><li>🏷️ Latest Release: v2026.03.25.16</li></p>
+      <h2>Description</h2>
+      <p>Chat Quality Agent - Agent phân tích chất lượng CSKH bằng AI</p>
+      <h2>Topics</h2>
+      <p>ai-agent, facebook-messenger, zalo</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p># Chat Quality Agent (CQA)</p>
+      <p>[![Docker Hub](https://img.shields.io/docker/v/buitanviet/chat-quality-agent?label=Docker%20Hub&sort=semver)](https://hub.docker.com/r/buitanviet/chat-quality-agent)</p>
+      <p>[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)</p>
+      <p>Hệ thống phân tích chất lượng chăm sóc khách hàng bằng AI. Tự động đồng bộ tin nhắn từ Zalo OA, Facebook Messenger, dùng AI (Claude/Gemini) đánh giá chất lượng CSKH và gửi cảnh báo qua Telegram/Email.</p>
+      <p>📖 <strong>Hướng dẫn sử dụng chi tiết: [https://tanviet12.github.io/chat-quality-agent/](https://tanviet12.github.io/chat-quality-agent/)</strong></p>
+      <p>![Dashboard](https://raw.githubusercontent.com/tanviet12/chat-quality-agent/main/docs/public/screenshots/dashboard.png)</p>
+      <h2>Tính năng</h2>
+      <p><li><strong>Đồng bộ tin nhắn</strong> từ Zalo OA và Facebook Messenger</li></p>
+      <p><li><strong>Đánh giá chất lượng CSKH</strong> bằng AI (Claude hoặc Gemini) — Đạt/Không đạt, điểm 0-100, nhận xét chi tiết</li></p>
+      <p><li><strong>Phân loại chat</strong> theo chủ đề tùy chỉnh (khiếu nại, góp ý, hỏi giá...)</li></p>
+      <p><li><strong>Cảnh báo tự động</strong> qua Telegram và Email</li></p>
+      <p><li><strong>Batch AI mode</strong> — gom nhiều cuộc chat/lần gọi AI, tiết kiệm chi phí</li></p>
+      <p><li><strong>Dashboard</strong> với biểu đồ, thống kê, cảnh báo gần đây</li></p>
+      <p><li><strong>Multi-tenant</strong> — nhiều công ty trên 1 hệ thống, phân quyền Owner > Admin > Member</li></p>
+      <p><li><strong>Tích hợp MCP</strong> cho Claude Web/Desktop</li></p>
+      <p><li><strong>SSL tự động</strong> qua Let's Encrypt (tùy chọn)</li></p>
+      <h2>Cài đặt nhanh</h2>
+      <h3>Cách 1: Cài tự động (khuyến nghị)</h3>
+      <p>```bash</p>
+      <p>curl -s https://raw.githubusercontent.com/tanviet12/chat-quality-agent/main/install.sh | sudo bash</p>
+      <p>```</p>
+      <p>Script tự cài Docker, tạo secrets ngẫu nhiên, pull images và khởi chạy.</p>
+      <h3>Cách 2: Build từ source</h3>
+      <p>```bash</p>
+      <p>git clone https://github.com/tanviet12/chat-quality-agent.git</p>
+      <p>cd chat-quality-agent</p>
+      <p>cp .env.example .env</p>
+      <p># Sửa .env</p>
+      <p>docker compose up -d --build</p>
+      <p>```</p>
+      <p>Truy cập: <strong>http://your-server-ip</strong> (hoặc <code>http://localhost</code> nếu cài trên máy local) — Lần đầu sẽ hiện trang Setup để tạo tài khoản admin.</p>
+      <h3>Bật SSL (tùy chọn)</h3>
+      <p>Thêm vào file <code>.env</code>:</p>
+      <p>```</p>
+      <p>LEGO_DOMAIN=cqa.yourdomain.com</p>
+      <p>LEGO_EMAIL=admin@yourdomain.com</p>
+      <p>```</p>
+      <p>Trỏ DNS A record về IP server, sau đó restart:</p>
+      <p>```bash</p>
+      <p>docker compose restart nginx</p>
+      <p>```</p>
+      <p>SSL sẽ tự động tạo và gia hạn qua Let's Encrypt.</p>
+      <h2>Công nghệ</h2>
+      <p>| Thành phần | Công nghệ |</p>
+      <p>|-----------|-----------|</p>
+      <p>| Backend | Go 1.25+ / Gin |</p>
+      <p>| Frontend | Vue 3 + Vuetify 4 + Vite |</p>
+      <p>| Database | MySQL 8.0 |</p>
+      <p>| AI | Claude (Anthropic) / Gemini (Google) |</p>
+      <p>| Reverse Proxy | Nginx + Let's Encrypt (Lego) |</p>
+      <p>| Deploy | Docker Compose |</p>
+      <h2>Kiến trúc</h2>
+      <p>```</p>
+      <p>                    ┌──────────────┐</p>
+      <p>  Internet ────────>│    Nginx     │ Port 80/443</p>
+      <p>                    │  (SSL + RP)  │</p>
+      <p>                    └──────┬───────┘</p>
+      <p>                           │</p>
+      <p>                    ┌──────┴───────┐</p>
+      <p>                    │   CQA App    │ Port 8080 (internal)</p>
+      <p>                    │ Go + Vue SPA │</p>
+      <p>                    └──────┬───────┘</p>
+      <p>                           │</p>
+      <p>                    ┌──────┴───────┐</p>
+      <p>                    │   MySQL 8.0  │ Port 3306 (internal)</p>
+      <p>                    └──────────────┘</p>
+      <p>```</p>
+      <h2>Cấu trúc dự án</h2>
+      <p>```</p>
+      <p>chat-quality-agent/</p>
+      <p>├── backend/            # Go API server</p>
+      <p>│   ├── ai/             # AI providers (Claude, Gemini)</p>
+      <p>│   ├── api/            # REST API handlers + middleware</p>
+      <p>│   ├── channels/       # Zalo OA, Facebook adapters</p>
+      <p>│   ├── db/             # GORM models + MySQL</p>
+      <p>│   ├── engine/         # Analyzer + Sync + Scheduler</p>
+      <p>│   ├── mcp/            # MCP server cho Claude</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-26*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

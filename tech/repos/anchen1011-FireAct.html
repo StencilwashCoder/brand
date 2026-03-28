@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireAct - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>FireAct</h1>
+  <p class="subtitle"><a href="https://github.com/anchen1011/FireAct" target="_blank">https://github.com/anchen1011/FireAct</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 292</p>
+    <p>🍴 Forks: 21</p>
+    <p>📝 Language: Python</p>
+    <p>📅 Created: 2023-10-07</p>
+    <p>🔄 Updated: 2026-01-28</p>
+    <p>🏷️ Latest Release: No releases</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>FireAct: Toward Language Agent Fine-tuning</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 292</li></p>
+      <p><li>🍴 Forks: 21</li></p>
+      <p><li>📝 Language: Python</li></p>
+      <p><li>📅 Created: 2023-10-07</li></p>
+      <p><li>🔄 Updated: 2026-01-28</li></p>
+      <p><li>🏷️ Latest Release: No releases</li></p>
+      <h2>Description</h2>
+      <p>FireAct: Toward Language Agent Fine-tuning</p>
+      <h2>Topics</h2>
+      <p>agent, fine-tuning, large-language-models, llm, reasoning</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p># FireAct: Toward Language Agent Fine-tuning</p>
+      <p>
+      <p>    <a href="https://www.python.org/"></p>
+      <p>        <img alt="Build" src="https://img.shields.io/badge/Python-3.7+-1f425f.svg?color=blue"></p>
+      <p>    </a></p>
+      <p>    <a href="https://github.com/anchen1011/FireAct/blob/main/LICENSE"></p>
+      <p>        <img alt="License" src="https://img.shields.io/badge/License-MIT-blue"></p>
+      <p>    </a></p>
+      <p>    <a href="https://huggingface.co/forestai/fireact_llama_2_7b" target="_blank"></p>
+      <p>        <img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20-Hugging%20Face-blue?color=blue&logoColor=white" /></p>
+      <p>    </a></p>
+      <p></p></p>
+      <p>![teaser](teaser.png)</p>
+      <p>This repository is based on our publication *FireAct: Toward Language Agent Fine-tuning* ([PDF](https://browse.arxiv.org/pdf/2310.05915.pdf)). It contains prompts, demo code and fine-tuning data we generated. It also includes the description and directory for the model family we fine-tuned. If you use this code or data in your work, please cite:</p>
+      <p>```</p>
+      <p>@misc{chen2023fireact,</p>
+      <p>      title={FireAct: Toward Language Agent Fine-tuning}, </p>
+      <p>      author={Baian Chen and Chang Shu and Ehsan Shareghi and Nigel Collier and Karthik Narasimhan and Shunyu Yao},</p>
+      <p>      year={2023},</p>
+      <p>      eprint={2310.05915},</p>
+      <p>      archivePrefix={arXiv},</p>
+      <p>      primaryClass={cs.CL}</p>
+      <p>}</p>
+      <p>```</p>
+      <h2>Overview</h2>
+      <p><li>Define tools in <code>tools/</code></li></p>
+      <p><li>Define tasks in <code>tasks/</code></li></p>
+      <p><li>Collect data & run experiments via <code>generation.py</code> </li></p>
+      <p><li>Results will be saved in <code>trajs/</code></li></p>
+      <h2>Data & Prompts</h2>
+      <p><li>Data to generate training data and run experiments in <code>data/</code>. We also include samples of training data for both Alpaca format and GPT format. See details [here](https://github.com/anchen1011/FireAct/tree/main/data).</li></p>
+      <p><li>Prompts to generate training data and run experiments in <code>prompts/</code></li></p>
+      <h2>Setup</h2>
+      <p>Set up OpenAI API key and store in environment variable  (see [here](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety))</p>
+      <p>```</p>
+      <p>export OPENAI_API_KEY=<YOUR_KEY></p>
+      <p>```</p>
+      <p> </p>
+      <p>Set up SERP API key and store in environment variable (see [here](https://serpapi.com))</p>
+      <p>```</p>
+      <p>export SERPAPI_API_KEY=<YOUR_KEY></p>
+      <p>```</p>
+      <p>Create virtual env, for example with conda</p>
+      <p>```</p>
+      <p>conda create -n fireact python=3.9</p>
+      <p>conda activate fireact</p>
+      <p>```</p>
+      <p>Clone this repo and install dependencies</p>
+      <p>```</p>
+      <p>git clone https://github.com/anchen1011/FireAct.git</p>
+      <p>pip install -r requirements.txt</p>
+      <p>```</p>
+      <h2>Run Demo</h2>
+      <h4>Data Generation</h4>
+      <p>Example:</p>
+      <p>```</p>
+      <p>python generation.py \</p>
+      <p>    --task hotpotqa \</p>
+      <p>    --backend gpt-4 \</p>
+      <p>    --promptpath default \</p>
+      <p>    --evaluate \</p>
+      <p>    --random \</p>
+      <p>    --task_split val \</p>
+      <p>    --temperature 0 \</p>
+      <p>    --task_end_index 5</p>
+      <p>```</p>
+      <p>See details with command <code>python generation.py -h</code></p>
+      <p>You need to set a high number (thousands) of <code>--task_end_index</code> to get sufficient good data samples. <strong>[WARNING] This is costly with gpt-4 and serpapi.</strong></p>
+      <p>You need to convert trajectories into [alpaca format](https://github.com/tatsu-lab/stanford_alpaca#data-release) or [gpt format](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset) for training. See our examples [here](https://github.com/anchen1011/FireAct/tree/main/data/finetune).</p>
+      <h4>Supervised Fine-tuning</h4>
+      <p>Example:</p>
+      <p>```</p>
+      <p>cd finetune/llama_lora</p>
+      <p>python finetune.py \</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-27*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResearcherSkill - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>ResearcherSkill</h1>
+  <p class="subtitle"><a href="https://github.com/krzysztofdudek/ResearcherSkill" target="_blank">https://github.com/krzysztofdudek/ResearcherSkill</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 96</p>
+    <p>🍴 Forks: 8</p>
+    <p>📝 Language: Not specified</p>
+    <p>📅 Created: 2026-03-22</p>
+    <p>🔄 Updated: 2026-03-25</p>
+    <p>🏷️ Latest Release: v1.1.0</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>One file. Your AI coding agent becomes a scientist. Autonomous experimentation skill for Claude Code, Codex, or any othe</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 96</li></p>
+      <p><li>🍴 Forks: 8</li></p>
+      <p><li>📝 Language: Not specified</li></p>
+      <p><li>📅 Created: 2026-03-22</li></p>
+      <p><li>🔄 Updated: 2026-03-25</li></p>
+      <p><li>🏷️ Latest Release: v1.1.0</li></p>
+      <h2>Description</h2>
+      <p>One file. Your AI coding agent becomes a scientist. Autonomous experimentation skill for Claude Code, Codex, or any other agent.</p>
+      <h2>Topics</h2>
+      <p>ai-agent, ai-coding, autonomous-agent, autoresearch, claude-code, codex, cursor, developer-tools, experimentation, prompt-engineering, research-automation, skill</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p><img width="1376" height="768" alt="Gemini_Generated_Image_5z6cxx5z6cxx5z6c" src="https://github.com/user-attachments/assets/02c3c4cd-fe2a-4fcd-b414-29bd84f5a741" /></p>
+      <p># Researcher Skill</p>
+      <p><strong>One file. Your AI coding agent becomes a scientist.</strong></p>
+      <p>[![Latest Release](https://img.shields.io/github/v/release/krzysztofdudek/ResearcherSkill)](https://github.com/krzysztofdudek/ResearcherSkill/releases/latest)</p>
+      <p>[![License](https://img.shields.io/github/license/krzysztofdudek/ResearcherSkill)](LICENSE)</p>
+      <p>Drop <code>researcher.md</code> into Claude Code, Codex, or any agent. It will design experiments, test hypotheses, discard what fails, keep what works — 30+ experiments overnight while you sleep.</p>
+      <h2>What it looks like running</h2>
+      <p>> ### Experiment 5 — Parallelize independent test suites</p>
+      <p>> <strong>Branch:</strong> research/faster-tests · <strong>Parent:</strong> #3 · <strong>Type:</strong> real</p>
+      <p>></p>
+      <p>> <strong>Hypothesis:</strong> Unit and integration suites don't share state. Running them in parallel should cut total time.</p>
+      <p>> <strong>Changes:</strong> split test config into two parallel jobs in <code>test.config.ts</code></p>
+      <p>> <strong>Result:</strong> 38s (was 94s baseline, 52s best) — <strong>new best</strong></p>
+      <p>> <strong>Status:</strong> keep</p>
+      <p>></p>
+      <p>> <strong>Insight:</strong> Most of the remaining time is in integration tests. Unit tests finish in 6s. Focus on integration from here.</p>
+      <p>| # | branch | metric | status | description |</p>
+      <p>|---|--------|--------|--------|-------------|</p>
+      <p>| 0 | research/faster-tests | 94s | keep | Baseline |</p>
+      <p>| 1 | research/faster-tests | 71s | keep | Remove redundant setup/teardown |</p>
+      <p>| 2 | research/faster-tests | 74s | discard | Shared test fixtures |</p>
+      <p>| 3 | research/faster-tests | 52s | keep | Mock external HTTP calls |</p>
+      <p>| 4 | research/faster-tests | - | thought | DB reset is slow but tests need clean state, skip for now |</p>
+      <p>| 5 | research/faster-tests | <strong>38s</strong> | <strong>keep</strong> | Parallelize independent test suites |</p>
+      <p>*Example is simulated. The skill works on any codebase — run it and share your real results.*</p>
+      <p><strong>Same loop, different problems:</strong></p>
+      <p><li><code>npm run build</code> takes 40s → agent gets it to 18s</li></p>
+      <p><li>prompt returns wrong format 30% of the time → agent gets it to 3%</li></p>
+      <p><li>API p99 is 200ms → agent finds the bottleneck and cuts it to 80ms</li></p>
+      <p><li>document parser misses edge cases → agent improves match rate from 74% to 91%</li></p>
+      <h2>How it works</h2>
+      <p>The agent interviews you about what to optimize, sets up a lab on a git branch, and works autonomously. Thinks, tests, reflects. Commits before every experiment, reverts on failure, logs everything.</p>
+      <p>It forks branches to explore divergent approaches. Detects when it's stuck and changes strategy. Keeps going until you stop it or it hits a target.</p>
+      <p>Generalizes [autoresearch](https://github.com/karpathy/autoresearch) beyond ML. Supports thought experiments, non-linear branching, qualitative metrics, convergence signals, and session resume.</p>
+      <p>All experiment history lives in an untracked <code>.lab/</code> directory. Git manages code. <code>.lab/</code> manages knowledge.</p>
+      <p><strong>Want the full walkthrough?</strong> Read the [guide](GUIDE.md). It walks through a complete example from start to finish.</p>
+      <h2>FAQ</h2>
+      <p><strong>How is this different from autoresearch?</strong></p>
+      <p>Autoresearch's core loop is universal, but the repo is wired to <code>train.py</code>, <code>val_bpb</code>, and GPU training. To use it on something else you'd rewrite the setup. This gives you that loop ready to go for any codebase.</p>
+      <p><strong>When would I use this instead of ML?</strong></p>
+      <p>It's not instead of ML. ML is one possible domain. This works on anything where the agent can try things, measure, and iterate. Code, scripts, documents, configs. Slow builds, flaky tests, API latency, prompt accuracy.</p>
+      <p><strong>How does it measure success for non-ML code?</strong></p>
+      <p>Whatever you can measure. Test pass rate, benchmark output, type check errors, build time. You set it up in the discovery phase. The agent asks what to measure and how. If you can run a command and get a number, that's your metric. For cases where there's no command to run, the agent scores against a qualitative rubric you define together. That part is less precise but the rest of the loop stays the same.</p>
+      <p><strong>How does convergence detection work?</strong></p>
+      <p>Both numerical and pattern-based. Metric plateau (<0.5% over last 5 keeps) is numerical. 5+ discards in a row, same code area modified 3+ times, alternating keep/discard on similar changes are pattern-based. The agent checks a signals table after every experiment and decides what to do. Not a hard-coded state machine, more like a checklist of "if you see this, try that."</p>
+      <p><strong>Can it improve itself?</strong></p>
+      <p>Sort of. The skill was optimized using the skill itself. A research document about how LLMs process instructions (attention decay, primacy/recency, instruction budgets) was used as criteria, and the agent ran the loop against its own prompt. Not fully recursive, but the loop was: research → skill → use skill to improve skill.</p>
+      <p><strong>Can't I just ask Claude to build this from the autoresearch repo?</strong></p>
+      <p>You can try. This saves you the work and includes things autoresearch doesn't have: thought experiments, non-linear branching, convergence detection, qualitative metrics, session resume.</p>
+      <h2>License</h2>
+      <p>MIT</p>
+      <h2>See also</h2>
+      <p><strong>[Yggdrasil](https://github.com/krzysztofdudek/Yggdrasil)</strong> — the agent experiments on your code. But does it understand what it's working on? Semantic memory for repositories.</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-25*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

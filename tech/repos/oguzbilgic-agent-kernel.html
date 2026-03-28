@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>agent-kernel - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>agent-kernel</h1>
+  <p class="subtitle"><a href="https://github.com/oguzbilgic/agent-kernel" target="_blank">https://github.com/oguzbilgic/agent-kernel</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 228</p>
+    <p>🍴 Forks: 22</p>
+    <p>📝 Language: Not specified</p>
+    <p>📅 Created: 2026-03-23</p>
+    <p>🔄 Updated: 2026-03-25</p>
+    <p>🏷️ Latest Release: No releases</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>Minimal kernel to make any AI coding agent stateful. Clone, point your agent, go.</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 228</li></p>
+      <p><li>🍴 Forks: 22</li></p>
+      <p><li>📝 Language: Not specified</li></p>
+      <p><li>📅 Created: 2026-03-23</li></p>
+      <p><li>🔄 Updated: 2026-03-25</li></p>
+      <p><li>🏷️ Latest Release: No releases</li></p>
+      <h2>Description</h2>
+      <p>Minimal kernel to make any AI coding agent stateful. Clone, point your agent, go.</p>
+      <h2>Topics</h2>
+      <p>agentic-ai, agents, claude-code, codex-cli, openclaw, opencode</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p># Agent Kernel</p>
+      <p>The easiest way to create an AI agent. Clone, start, talk.</p>
+      <p>Your agent remembers between sessions, takes notes, and builds on past work. No framework, no database — just three markdown files and a git repo.</p>
+      <p>Works with any AI coding agent: OpenCode, Claude Code, Codex, Cursor, Windsurf, etc.</p>
+      <h2>Quick start</h2>
+      <p>```bash</p>
+      <p>git clone https://github.com/oguzbilgic/agent-kernel.git my-agent</p>
+      <p>cd my-agent</p>
+      <p>```</p>
+      <p>Start your agent:</p>
+      <p>```bash</p>
+      <p>opencode     # or claude, codex, cursor, etc.</p>
+      <p>```</p>
+      <p>That's it. The agent reads the kernel, realizes it's new, asks who you want it to be. You tell it. It remembers.</p>
+      <h2>Memory structure</h2>
+      <p>```</p>
+      <p>AGENTS.md          ← kernel (generic, don't edit)</p>
+      <p>IDENTITY.md        ← who this agent is (agent maintains)</p>
+      <p>KNOWLEDGE.md       ← index of knowledge files (agent maintains)</p>
+      <p>knowledge/         ← facts about the world (mutable)</p>
+      <p>notes/             ← daily session logs (append-only)</p>
+      <p>```</p>
+      <p>Two kinds of memory:</p>
+      <p><li><strong><code>knowledge/</code></strong> — State. Facts about how things are right now. The agent updates these when reality changes.</li></p>
+      <p><li><strong><code>notes/</code></strong> — Narrative. What happened each session — decisions, actions, open items. Append-only. Never modified after the day ends.</li></p>
+      <h2>Why this works</h2>
+      <p>AI agents already read <code>AGENTS.md</code> (or <code>CLAUDE.md</code>, <code>.cursorrules</code>, etc.) as project instructions. This kernel uses that mechanism to teach the agent *how to remember*.</p>
+      <p>The agent doesn't need a database, a vector store, or a custom framework. It just needs:</p>
+      <p><li>A file that says "you are stateful, here's how"</li></p>
+      <p><li>A git repo to store memory in</li></p>
+      <p><li>Plain markdown files</li></p>
+      <h2>Multiple agents</h2>
+      <p>Each agent is its own repo. To create another:</p>
+      <p>```bash</p>
+      <p>git clone https://github.com/oguzbilgic/agent-kernel.git another-agent</p>
+      <p>cd another-agent</p>
+      <p>opencode     # or claude, codex, etc.</p>
+      <p>```</p>
+      <p>Same kernel, different identity, different knowledge. You can have a homelab agent, an investing agent, a health agent — all running the same OS.</p>
+      <h2>License</h2>
+      <p>MIT</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-25*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

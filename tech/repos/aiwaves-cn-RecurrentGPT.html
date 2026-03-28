@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecurrentGPT - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>RecurrentGPT</h1>
+  <p class="subtitle"><a href="https://github.com/aiwaves-cn/RecurrentGPT" target="_blank">https://github.com/aiwaves-cn/RecurrentGPT</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 1002</p>
+    <p>🍴 Forks: 158</p>
+    <p>📝 Language: Python</p>
+    <p>📅 Created: 2023-05-22</p>
+    <p>🔄 Updated: 2026-03-26</p>
+    <p>🏷️ Latest Release: No releases</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>Official Code for Paper: RecurrentGPT: Interactive Generation of (Arbitrarily) Long Text</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 1002</li></p>
+      <p><li>🍴 Forks: 158</li></p>
+      <p><li>📝 Language: Python</li></p>
+      <p><li>📅 Created: 2023-05-22</li></p>
+      <p><li>🔄 Updated: 2026-03-26</li></p>
+      <p><li>🏷️ Latest Release: No releases</li></p>
+      <h2>Description</h2>
+      <p>Official Code for Paper: RecurrentGPT: Interactive Generation of (Arbitrarily) Long Text</p>
+      <h2>Topics</h2>
+      <p>None</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <p># RecurrentGPT</p>
+      <p align="center"><a href="https://arxiv.org/pdf/2305.13304.pdf">[📄 Paper]</a> | <a href="https://www.aiwaves.org/recurrentgpt">[🤗 Demo - Writing Assistant]</a> | <a href="https://www.aiwaves.org/interactivefiction">[🤗 Demo - Interactive Fiction]</a> |  <a href="https://www.youtube.com/watch?v=rMnw3ljCibc">[📺 Video]</a> | <a href="https://discord.gg/aNznfrYPeR">[🔥 Discord]</a> </p>
+      <hr>
+      <h2>Framework Illustration</h2>
+      <p><div align=center></p>
+      <p><img src="resources/recurGPT-structure.png" width = "640" alt="struct" align=center /></p>
+      <p></div></p>
+      <p>> RecurrentGPT replaces the vectorized elements (i.e., cell state, hidden state, input, and output) in a Long-short Term Memory RNN (LSTM) with natural language (i.e., paragraphs of texts), and simulates the recurrence mechanism with prompt engineering. </p>
+      <p>> At each timestep t, RecurrentGPT receives a paragraph of text and a brief plan of the next paragraph, which are both generated in step t − 1. It then attends to the long-term memory, which contains the summaries of all previously generated paragraphs and can be stored on hard drives, and relevant paragraphs can be retrieved with semantic search.</p>
+      <p>> RecurrentGPT also maintains a short-term memory that summarizes key information within recent timesteps in natural language and is updated at each time step. RecurrentGPT combines all aforementioned inputs in a prompt and asks the backbone LLM to generate a new paragraph, a short plan for the next paragraph, and updates the long-short term memory by rewriting the short-term memory and appending the summary of the output paragraph to the long-term memory. </p>
+      <h3>Example</h3>
+      <p><div align=center></p>
+      <p><img src="resources/recurGPT-illu.png" width = "640" alt="struct" align=center /></p>
+      <p></div></p>
+      <h2>Deployment</h2>
+      <p>You can change the configurations given in the <code>recurrent.sh</code> script</p>
+      <p>```yaml</p>
+      <p>iteration: 10                       #(int) the number of rounds you would like it to roll.</p>
+      <p>outfile: response.txt               #(str) the output file path.</p>
+      <p>init_prompt: init_prompt.json       #(str) the path to the prompt used for initialization.</p>
+      <p>topic: Aliens                       #(str) the topic that you wish your novel is about.</p>
+      <p>type: science-fiction               #(str) the type of novel you would like to write.</p>
+      <p>```</p>
+      <p>Then after specify your <code>OPENAI_API_KEY</code> in the <code>recurrent.sh</code> file, you can run</p>
+      <p>```</p>
+      <p>sh recurrent.sh</p>
+      <p>```</p>
+      <p>NOTE: If your local internet is not allowed to access OpenAI's API, you might need to first export your HTTP proxy in the <code>recurrent.sh</code> file as well.</p>
+      <p>```</p>
+      <p>export http_proxy='your_proxy'</p>
+      <p>```</p>
+      <h2>Showcases</h2>
+      <h3>Prompt Engineering</h3>
+      <p><div align=center></p>
+      <p><img src="resources/recurGPT-prompt.png" width = "640" alt="struct" align=center /></p>
+      <p></div></p>
+      <h3>Iterations</h3>
+      <p><div align=center></p>
+      <p><img src="resources/recurGPT-case.png" width = "640" alt="struct" align=center /></p>
+      <p></div></p>
+      <p>> Human writer starts by choosing the topic he/she wants to write and writes a short paragraph describing the background and the outline of the book. Then RECURRENTGPT automatically generates the first paragraphs and provides a few possible options for the writer to continue the story. The writer may select one from them and edit it if needed. He or she can also write a short plan for the next few paragraphs by him/herself if generated plans are all inappropriate, which makes human-AI co-writing process more flexible</p>
+      <h2>Web demo</h2>
+      <p>You can directly use our online demo at:</p>
+      <p>https://www.aiwaves.org/recurrentgpt  and https://www.aiwaves.org/interactivefiction</p>
+      <p>Or you can run it on your local machine by editing the OPENAI_API_KEY and OPENAI_Proxy in utils.py and then run:</p>
+      <p>```</p>
+      <p>python gradio_server.py</p>
+      <p>```</p>
+      <p>![web-demo](resources/web_demo.png)</p>
+      <h2>Use customized LLMs for local deployment</h2>
+      <p>Please refer to https://github.com/jackaduma/Recurrent-LLM to use opensource LLMs for local deployment. Many thanks to @jackaduma </p>
+      <h2>Citation</h2>
+      <p>```angular2</p>
+      <p>@misc{zhou2023recurrentgpt,</p>
+      <p>      title={RecurrentGPT: Interactive Generation of (Arbitrarily) Long Text}, </p>
+      <p>      author={Wangchunshu Zhou and Yuchen Eleanor Jiang and Peng Cui and Tiannan Wang and Zhenxin Xiao and Yifan Hou and Ryan Cotterell and Mrinmaya Sachan},</p>
+      <p>      year={2023},</p>
+      <p>      eprint={2305.13304},</p>
+      <p>      archivePrefix={arXiv},</p>
+      <p>      primaryClass={cs.CL}</p>
+      <p>}</p>
+      <p>```</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-27*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>

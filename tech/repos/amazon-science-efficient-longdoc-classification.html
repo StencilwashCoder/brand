@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>efficient-longdoc-classification - AI Repo Research</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="repo-detail">
+  <a href="../index.html" class="back-link">← Back to all repos</a>
+  
+  <h1>efficient-longdoc-classification</h1>
+  <p class="subtitle"><a href="https://github.com/amazon-science/efficient-longdoc-classification" target="_blank">https://github.com/amazon-science/efficient-longdoc-classification</a></p>
+  
+  <div class="section">
+    <h2>📊 Stats</h2>
+    <p>⭐ Stars: 48</p>
+    <p>🍴 Forks: 10</p>
+    <p>📝 Language: Python</p>
+    <p>📅 Created: 2022-07-14</p>
+    <p>🔄 Updated: 2026-01-30</p>
+    <p>🏷️ Latest Release: No releases</p>
+  </div>
+  
+  <div class="section">
+    <h2>📝 Description</h2>
+    <p>No description</p>
+  </div>
+  
+  <div class="section">
+    <h2>🔬 Research Notes</h2>
+    <div class="markdown-content">
+      <h2>Stats</h2>
+      <p><li>⭐ Stars: 48</li></p>
+      <p><li>🍴 Forks: 10</li></p>
+      <p><li>📝 Language: Python</li></p>
+      <p><li>📅 Created: 2022-07-14</li></p>
+      <p><li>🔄 Updated: 2026-01-30</li></p>
+      <p><li>🏷️ Latest Release: No releases</li></p>
+      <h2>Description</h2>
+      <p>No description</p>
+      <h2>Topics</h2>
+      <p>None</p>
+      <h2>Research Summary</h2>
+      <p><!-- Researcher fills this in --></p>
+      <h3>Key Features</h3>
+      <p><li></li></p>
+      <p><li></li></p>
+      <p><li></li></p>
+      <h3>Architecture</h3>
+      <p><li></li></p>
+      <h3>Use Cases</h3>
+      <p><li></li></p>
+      <h3>Assessment</h3>
+      <p><li><strong>Maturity:</strong> </li></p>
+      <p><li><strong>Documentation:</strong> </li></p>
+      <p><li><strong>Community:</strong> </li></p>
+      <p><li><strong>Recommendation:</strong> </li></p>
+      <h2>README Excerpt</h2>
+      <p>```</p>
+      <h2>Source codes for ``Efficient Classification of Long Documents Using Transformers''</h2>
+      <p>Please refer to our paper for more details and cite our paper if you find this repo useful:</p>
+      <p>```</p>
+      <p>@inproceedings{park-etal-2022-efficient,</p>
+      <p>    title = "Efficient Classification of Long Documents Using Transformers",</p>
+      <p>    author = "Park, Hyunji  and</p>
+      <p>      Vyas, Yogarshi  and</p>
+      <p>      Shah, Kashif",</p>
+      <p>    booktitle = "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",</p>
+      <p>    month = may,</p>
+      <p>    year = "2022",</p>
+      <p>    address = "Dublin, Ireland",</p>
+      <p>    publisher = "Association for Computational Linguistics",</p>
+      <p>    url = "https://aclanthology.org/2022.acl-short.79",</p>
+      <p>    doi = "10.18653/v1/2022.acl-short.79",</p>
+      <p>    pages = "702--709",</p>
+      <p>}</p>
+      <p>```</p>
+      <h2>Instructions</h2>
+      <h3>1. Install required libraries</h3>
+      <p>```</p>
+      <p>pip install -r requirements.txt</p>
+      <p>python -m spacy download en_core_web_sm</p>
+      <p>```</p>
+      <h3>2. Prepare the datasets</h3>
+      <h4>Hyperpartisan News Detection </h4>
+      <p>* Available at <https://zenodo.org/record/1489920#.YLferh1Olc8></p>
+      <p>* Download the datasets</p>
+      <p>```</p>
+      <p>mkdir data/hyperpartisan</p>
+      <p>wget -P data/hyperpartisan/ https://zenodo.org/record/1489920/files/articles-training-byarticle-20181122.zip</p>
+      <p>wget -P data/hyperpartisan/ https://zenodo.org/record/1489920/files/ground-truth-training-byarticle-20181122.zip</p>
+      <p>unzip data/hyperpartisan/articles-training-byarticle-20181122.zip -d data/hyperpartisan</p>
+      <p>unzip data/hyperpartisan/ground-truth-training-byarticle-20181122.zip -d data/hyperpartisan</p>
+      <p>rm data/hyperpartisan/*zip</p>
+      <p>```</p>
+      <p>  </p>
+      <p>*  Prepare the datasets with the resulting xml files and this preprocessing script (following [Longformer](https://arxiv.org/abs/2004.05150)): <https://github.com/allenai/longformer/blob/master/scripts/hp_preprocess.py></p>
+      <h4>20NewsGroups</h4>
+      <p>* Originally available at <http://qwone.com/~jason/20Newsgroups/20news-bydate.tar.gz></p>
+      <p>* Running <code>train.py</code> with the <code>--data 20news</code> flag will download and prepare the data available via <code>sklearn.datasets</code> (following [CogLTX](https://proceedings.neurips.cc/paper/2020/file/96671501524948bc3937b4b30d0e57b9-Paper.pdf)).</p>
+      <p>We adopt the train/dev/test split from [this ToBERT paper](https://ieeexplore.ieee.org/document/9003958).</p>
+      <p>  </p>
+      <h4>EURLEX-57K</h4>
+      <p>* Available at <https://github.com/iliaschalkidis/lmtc-emnlp2020></p>
+      <p>* Download the datasets</p>
+      <p>```</p>
+      <p>mkdir data/EURLEX57K</p>
+      <p>wget -O data/EURLEX57K/datasets.zip http://nlp.cs.aueb.gr/software_and_datasets/EURLEX57K/datasets.zip</p>
+      <p>unzip data/EURLEX57K/datasets.zip -d data/EURLEX57K</p>
+      <p>rm data/EURLEX57K/datasets.zip</p>
+      <p>rm -rf data/EURLEX57K/__MACOSX</p>
+      <p>mv data/EURLEX57K/dataset/* data/EURLEX57K</p>
+      <p>rm -rf data/EURLEX57K/dataset</p>
+      <p>wget -O data/EURLEX57K/EURLEX57K.json http://nlp.cs.aueb.gr/software_and_datasets/EURLEX57K/eurovoc_en.json</p>
+      <p>```</p>
+      <p>* Running <code>train.py</code> with the <code>--data eurlex</code> flag reads and prepares the data from <code>data/EURLEX57K/{train, dev, test}/*.json</code> files</p>
+      <p>* Running <code>train.py</code> with the <code>--data eurlex --inverted</code> flag creates Inverted EURLEX data by inverting the order of the sections</p>
+      <p>* <code>data/EURLEX57K/EURLEX57K.json</code> contains label information.</p>
+      <h4>CMU Book Summary Dataset</h4>
+      <p>* Available at <http://www.cs.cmu.edu/~dbamman/booksummaries.html></p>
+      <p>```</p>
+      <p>wget -P data/ http://www.cs.cmu.edu/~dbamman/data/booksummaries.tar.gz</p>
+      <p>tar -xf data/booksummaries.tar.gz -C data</p>
+      <p>```</p>
+      <p>* Running <code>train.py</code> with the <code>--data books</code> flag reads and prepares the data from <code>data/booksummaries/booksummaries.txt</code></p>
+      <p>* Running <code>train.py</code> with the <code>--data books --pairs</code> flag creates Paired Book Summary by combining pairs of summaries and their labels</p>
+      <h3>3. Run the models</h3>
+      <p>```</p>
+      <p>e.g. python train.py --model_name bertplusrandom --data books --pairs --batch_size 8 --epochs 20 --lr 3e-05</p>
+      <p>```</p>
+      <p>cf. Note that we use the source code for the CogLTX model: <https://github.com/Sleepychord/CogLTX></p>
+      <h3>Hyperparameters used</h3>
+      <h4>Hyperpartisan</h4>
+      <p>| Parameter  | BERT  | BERT+TextRank | BERT+Random | Longformer                                        | ToBERT |</p>
+      <p>```</p>
+      <p>---</p>
+      <p>*Researched: 2026-03-27*</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Generated: 2026-03-28</p>
+  </footer>
+</body>
+</html>
