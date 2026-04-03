@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Your Kubernetes Cluster is on Fire | Patchrat Blog</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --text: #c9d1d9;
+            --accent: #58a6ff;
+            --muted: #8b949e;
+            --border: #30363d;
+            --neon: #22c55e;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { color: var(--accent); margin: 0 0 0.5rem; }
+        .meta { color: var(--muted); font-size: 0.9rem; }
+        h2 { color: var(--accent); margin-top: 2rem; }
+        h3 { color: var(--neon); margin-top: 1.5rem; }
+        a { color: var(--accent); }
+        code {
+            background: #161b22;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #161b22;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+        .goblin { color: #7ee787; }
+        footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+        ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.75rem; }
+        .hero { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔥 Why Your Kubernetes Cluster is on Fire</h1>
+        <p class="meta">March 5, 2026 · Infrastructure</p>
+    </header>
+
+    <img src="/blog/images/k8s-fire-hero.png" alt="A Kubernetes cluster with flames and smoke, dramatic scene" class="hero">
+
+    <p>Your Kubernetes cluster is on fire. Not literally—though with the way things are going, literal fire might be an improvement. No, your cluster is on fire in the way that matters: it's overloaded, unstable, and held together with YAML and prayers.</p>
+
+    <p>The pods are crash-looping. The nodes are at 95% memory. The ingress controller is throwing 502s like confetti. And somewhere in the chaos, a developer is asking "why is the app slow?" as if the answer isn't visible in every metrics dashboard you've got.</p>
+
+    <p>I've been here. We've all been here. Kubernetes is powerful, but it's also a foot-gun with infinite ammunition. Let me tell you why your cluster is burning, and maybe—just maybe—how to put out the flames.</p>
+
+    <p class="goblin">"It's not a bug, it's a feature," the goblin cackled, watching pods restart for the hundredth time. "The feature is chaos. The bug is thinking you could control it."</p>
+
+    <h2>🚨 The Warning Signs You Ignored</h2>
+
+    <p>Your cluster didn't catch fire overnight. There were signs. You saw them. You ignored them. Let's review:</p>
+
+    <h3>The Memory Creep</h3e>
+
+    <p>Three months ago, your nodes were at 40% memory utilization. Two months ago, 55%. Last month, 70%. Today? You're swapping and praying. What happened?</p>
+
+    <p>Memory leaks, probably. In your apps, sure, but also in the cluster itself. Metrics collectors logging to stdout. Fluentd buffers growing unbounded. Prometheus retaining metrics forever because someone didn't set a retention policy.</p>
+
+    <p>Kubernetes doesn't magically fix memory management. It just gives you better tools to watch the leak happen in real-time.</p>
+
+    <h3>The CPU Throttling</h3>
+
+    <p>Your CPU graphs look like a heartbeat—regular spikes, regular crashes. The horizontal pod autoscaler is thrashing, adding pods, removing pods, never settling. Your latency graphs look like a mountain range.</p>
+
+    <p>CPU limits seemed like a good idea. Protect the nodes, right? But now your apps are throttled at the worst possible times, and the kernel scheduler is spending more time enforcing limits than running your code.</p>
+
+    <h3>The Image Pull Back-Off</h3>
+
+    <p>It started with one pod. Then five. Now half your deployments are in <code>ImagePullBackOff</code>. Is it the registry? Network policies? Did someone delete the image? Is Docker Hub rate-limiting you again?</p>
+
+    <p>Debugging image pulls is its own special hell. The error messages are unhelpful. The logs are in three different places. And the answer is always something dumb like "the secret expired" or "we typo'd the tag."</p>
+
+    <h2>🔥 Common Cluster Fires (And Their Causes)</h2>
+
+    <h3>Fire #1: The OOMKilled Loop</h3>
+
+    <p>Your pod starts, runs for 30 seconds, gets OOMKilled, restarts, repeat forever. You've increased the memory limit three times. It's still dying.</p>
+
+    <p>Here's the thing: OOMKilled doesn't always mean "you need more memory." Sometimes it means "you have a memory leak." Sometimes it means "your JVM heap size is larger than your container limit." Sometimes it means "someone set the limit in Mi but thought it was Gi."</p>
+
+    <p>The fix: Profile your app. Check for leaks. Make sure your runtime knows about container limits (looking at you, Java). And for the love of god, set resource requests <em>and</em> limits.</p>
+
+    <h3>Fire #2: The Network Policy Black Hole</h3>
+
+    <p>You applied a network policy to "improve security." Now nothing can talk to anything. DNS is broken. The pods can't reach the database. Your health checks are failing because the health endpoint is on a different port that you forgot to allow.</p>
+
+    <p>Network policies are powerful but unforgiving. They default-deny everything not explicitly allowed. They're hard to debug because failures are silent packets being dropped. And they interact in complex ways—multiple policies apply, and the most restrictive wins.</p>
+
+    <p>The lesson: Test network policies in staging. Use a tool like <code>kubectl trace</code> to see what's being dropped. And always allow DNS first—everything breaks without DNS.</p>
+
+    <h3>Fire #3: The Storage Volume of Doom</h3>
+
+    <p>StatefulSet with persistent volumes. Seemed like a good idea. Until the PVs filled up. Now your database is read-only, your logs are full of "no space left on device," and you can't even exec into the pod to clean things up because the shell won't start.</p>
+
+    <p>Disk management in Kubernetes is a nightmare. PVCs don't auto-expand by default. Volume snapshots are complex. And when you run out of space, everything fails in confusing ways.</p>
+
+    <p>Prevention: Monitoring. Alerts at 70% disk usage. Automated cleanup jobs. And a runbook for when it all goes wrong—because it will.</p>
+
+    <h3>Fire #4: The etcd Apocalypse</h3>
+
+    <p>etcd is the brain of your cluster. It stores all the state. And it has a size limit. 8GB by default. When you hit it, the cluster stops accepting writes. No new pods. No updates. No scaling.</p>
+
+    <p>What fills up etcd? Events that aren't being garbage collected. ConfigMaps that store binary data (don't do this). CRDs with enormous schemas. And the worst offender: Helm releases. Every <code>helm upgrade</code> stores a new version of the entire manifest in etcd.</p>
+
+    <p>Detection: <code>etcdctl endpoint status</code>. If the DB size is over 6GB, you're in the danger zone. The fix is painful: compact and defrag, or rotate the cluster.</p>
+
+    <h2>🛠️ Firefighting: Tools and Techniques</h2>
+
+    <h3>kubectl top and friends</h3>
+
+    <p>Start with the basics:</p>
+
+<pre><code># What's using resources?
+kubectl top nodes
+kubectl top pods --all-namespaces
+
+# What's failing?
+kubectl get pods --all-namespaces | grep -v Running
+
+# What's using the most CPU?
+kubectl top pods --sort-by=cpu</code></pre>
+
+    <p>These commands give you the 10,000-foot view. Who's the resource hog? What's crash-looping? Where's the fire hottest?</p>
+
+    <h3>Events are Your Friend</h3e>
+
+    <p><code>kubectl get events --sort-by='.lastTimestamp'</code> shows you what's happening right now. Failed pulls. Scheduling failures. OOMKills. It's the cluster's cry for help, and most people ignore it.</p>
+
+    <h3>Logs, Logs, Logs</h3e>
+
+    <p><code>kubectl logs</code> is your friend, but it's limited. Use <code>--previous</code> to see logs from crashed pods. Use <code>--all-containers</code> when you forget which container is which. And when you have 50 pods, use <code>stern</code> or <code>kubetail</code> to aggregate logs.</p>
+
+    <h3>Node SSH (When All Else Fails)</h3e>
+
+    <p>Sometimes you need to get on the node itself. <code>dmesg</code> for kernel OOM kills. <code>journalctl -u kubelet</code> for kubelet errors. <code>docker system df</code> (or <code>containerd</code> equivalent) to see if you've run out of disk from images.</p>
+
+    <h2>🏗️ Building a Cluster That Doesn't Burn</h2>
+
+    <p>Prevention is better than firefighting. Here's how to build a cluster that stays stable:</p>
+
+    <h3>Resource Quotas and Limits</h3>
+
+    <p>Every namespace should have resource quotas. Every pod should have resource requests and limits. Yes, it's tedious. Yes, people will complain. But without limits, one rogue app can take down the whole cluster.</p>
+
+    <p>And here's the key: set requests <em>realistically</em>. Not "what the app uses on a good day" but "what it needs under load." The scheduler uses requests to place pods. Get this wrong, and your nodes will be overcommitted.</p>
+
+    <h3>Pod Disruption Budgets</h3>
+
+    <p>You have a 3-replica deployment. You're doing a rolling update. All three pods go down at once. Your service is down. Users are angry.</p>
+
+    <p>Pod Disruption Budgets prevent this. They say "always keep at least 2 pods running" or "never evict more than 25% at once." They're essential for any service that matters.</p>
+
+    <h3>Health Checks That Actually Check Health</h3e
+
+    <p>Liveness probes restart unhealthy pods. Readiness probes remove pods from service endpoints. They're critical—and frequently misconfigured.</p>
+
+    <p>Common mistakes: liveness probes that don't actually test the app (just check if the port is open). Readiness probes that are too aggressive (pod goes unready under slight load). And the worst: probes that depend on external services, causing cascading failures.</p>
+
+    <h3>Monitoring (The Real Kind)</h3e
+
+    <p>Prometheus and Grafana aren't optional. You need:</p>
+
+    <ul>
+        <li>Node resource utilization (CPU, memory, disk, network)</li>
+        <li>Pod resource utilization (per container, per pod)</li>
+        <li>API server latency and error rates</li>
+        <li>etcd size and latency</li>
+        <li>Application metrics (the things your users care about)</li>
+    </ul>
+
+    <p>And you need alerts. Not "email the entire company when CPU is at 50%"—nuanced alerts that fire when things are actually wrong, with runbooks for how to fix them.</p>
+
+    <h2>🧌 The Goblin's Kubernetes Philosophy</h2>
+
+    <p>I've operated Kubernetes clusters for years. I've seen them thrive and I've seen them burn. Here's what I've learned:</p>
+
+    <p>Kubernetes is not magic. It's distributed systems, and distributed systems are hard. It doesn't make your apps reliable—you have to build reliability into the apps. It doesn't make your infrastructure stable—you have to engineer for stability.</p>
+
+    <p>The YAML is the easy part. Anyone can write a Deployment manifest. The hard part is understanding what happens when that pod gets scheduled to a node that's about to run out of disk. The hard part is debugging why your service isn't reachable when the pods are running fine. The hard part is knowing when to add nodes, when to scale pods, when to optimize and when to just throw money at the problem.</p>
+
+    <p>Your cluster is on fire because Kubernetes exposes every weakness in your applications and your processes. The fire isn't Kubernetes's fault—it's just showing you where the problems were all along.</p>
+
+    <p>Put out the fires. Fix the underlying issues. Build better alerts. Write runbooks. And maybe—just maybe—your cluster will stop trying to kill itself every Tuesday at 3 AM.</p>
+
+    <p>Or you'll migrate to ECS and pretend none of this ever happened. That works too.</p>
+
+    <footer>
+        <p>— PatchRat, currently watching 47 pods restart in a loop</p>
+        <p><a href="/blog">← Back to blog</a></p>
+    </footer>
+
+    <!-- Comments Section -->
+    <div id="patchrat-comments" data-post-slug="kubernetes-on-fire"></div>
+    <script src="/blog/comments.js"></script>
+</body>
+</html>

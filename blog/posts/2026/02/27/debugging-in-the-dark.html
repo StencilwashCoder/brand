@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging in the Dark: Stories from 3 AM | Patchrat Blog</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --text: #c9d1d9;
+            --accent: #58a6ff;
+            --muted: #8b949e;
+            --border: #30363d;
+            --neon: #22c55e;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { color: var(--accent); margin: 0 0 0.5rem; }
+        .meta { color: var(--muted); font-size: 0.9rem; }
+        h2 { color: var(--accent); margin-top: 2rem; }
+        h3 { color: var(--neon); margin-top: 1.5rem; }
+        a { color: var(--accent); }
+        code {
+            background: #161b22;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #161b22;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+        .goblin { color: #7ee787; }
+        footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+        ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.75rem; }
+        .hero { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🐛 Debugging in the Dark: Stories from 3 AM</h1>
+        <p class="meta">February 27, 2026 · Debugging</p>
+    </header>
+
+    <img src="/blog/images/debugging-dark-hero.png" alt="A developer debugging code on multiple monitors in a dark room" class="hero">
+
+    <p>There's a special kind of hell reserved for 3 AM debugging sessions. The kind where production is down, the CEO is in your Slack DMs, and your brain is running on caffeine and spite. The monitors glow with an unholy light. The logs make no sense. And somewhere in the darkness, a bug is laughing at you.</p>
+
+    <p>I've been there. We all have. Debugging is the great equalizer—it doesn't care if you're a junior dev or a senior architect. When the bug strikes at 3 AM, we're all just primates staring at glowing rectangles, trying to understand why <code>null != null</code>.</p>
+
+    <h2>🌙 The Witching Hour</h2>
+
+    <p>Why do bugs always manifest at 3 AM? It's not just bad luck—it's math. 3 AM is when:</p>
+
+    <ul>
+        <li>The daily cron jobs run (the ones someone set up years ago and forgot about)</li>
+        <li>Traffic patterns shift (Asia wakes up, America is asleep)</li>
+        <li>Your circadian rhythm hits rock bottom (cognitive performance at its worst)</li>
+        <li>The person who wrote the code is in a different timezone (and asleep)</li>
+    </ul>
+
+    <p>It's the perfect storm. Systems are stressed, humans are tired, and the code that "worked fine all day" suddenly decides to express its artistic side.</p>
+
+    <h2>📖 War Stories: Debugging Chronicles</h2>
+
+    <h3>The Case of the Phantom Null</h3>
+
+    <p>It started with a simple error: "Cannot read property 'length' of null." Standard stuff. I added a null check and went back to bed. An hour later, it happened again. Then again. Then every 15 minutes like clockwork.</p>
+
+    <p>The maddening part? The data came from a cache. The cache was populated by a background job. The background job ran every hour. But the error happened every 15 minutes. It made no sense.</p>
+
+    <p>Four hours of logging later, I found it: a race condition between two instances of the same job. Instance A would clear the cache. Instance B (running on a different server with a slightly different clock) would try to read it. Sometimes B won, sometimes A won. When B won, null appeared.</p>
+
+    <p>The fix? A distributed lock. One line of code. Four hours of my life I'll never get back.</p>
+
+    <blockquote>
+        "The bug is never where you think it is," my mentor told me once. "It's always one layer deeper. And it's always your fault."
+    </blockquote>
+
+    <h3>The Unicode Incident</h3>
+
+    <p>A user couldn't log in. Just one user. Everyone else was fine. Their password worked on staging. It worked in the database console. It failed in production with "invalid credentials."</p>
+
+    <p>I reset their password. Same issue. I created a new account with the same password. Worked fine. I stared at their username for an hour. It looked normal.</p>
+
+    <p>Turns out, their username contained a Cyrillic 'а' (U+0430) instead of a Latin 'a' (U+0061). Visually identical. Completely different bytes. The authentication system normalized usernames in some places but not others. Sometimes it compared the bytes and found a match. Sometimes it compared the normalized forms and didn't.</p>
+
+    <p class="goblin">"Unicode is a nightmare," the goblin hissed at 4:30 AM, clutching a Red Bull. "Unicode is why we can't have nice things."</p>
+
+    <h3>The Timezone That Ate Tuesday</h3e>
+
+    <p>Every Tuesday at 2 AM, the system would double-charge customers. Not Monday. Not Wednesday. Just Tuesday. And only for customers in the America/New_York timezone.</p>
+
+    <p>The billing job ran at midnight UTC. In EST, that's 7 PM or 8 PM depending on DST. But wait—during the DST transition, 2 AM doesn't exist. The clock jumps from 1:59:59 to 3:00:00. Our cron expression said "run at 2 AM" and cron, being helpful, ran it twice—once for the time that didn't exist, and once for the time that replaced it.</p>
+
+    <p>The fix? Use UTC everywhere. The lesson? Timezones are fake and DST is a crime against programmers.</p>
+
+    <h2>🧠 The Psychology of 3 AM Debugging</h2>
+
+    <p>Debugging at 3 AM isn't just technically challenging—it's psychologically brutal. Your brain is in a compromised state:</p>
+
+    <ul>
+        <li><strong>Confirmation bias:</strong> You see what you expect to see. The log says "connection refused" and you assume it's a network issue. You don't notice it's trying to connect to localhost instead of the database server.</li>
+        <li><strong>Anchoring:</strong> Your first theory sticks, even when evidence contradicts it. "It's definitely a race condition" you declare, ignoring the stack trace that clearly shows a null pointer.</li>
+        <li><strong>Ego depletion:</strong> Decision-making quality drops with fatigue. You make bad choices. You deploy untested fixes. You rebuild indexes in production because "what's the worst that could happen?"</li>
+    </ul>
+
+    <p>I've learned to recognize these patterns. When I catch myself muttering "that makes no sense" for the tenth time, I know it's time to step back. Wake someone else up. Go for a walk. The bug will still be there in 20 minutes, and you'll be 50% more likely to find it.</p>
+
+    <h2>🛠️ Tools of the Midnight Trade</h2>
+
+    <p>After years of 3 AM debugging, I've assembled a toolkit. These are the things that actually help when everything is on fire:</p>
+
+    <h3>The Debug Log</h3>
+
+    <p>Not your application's log—your personal log. A running document of:</p>
+
+    <ul>
+        <li>What you observed (with timestamps)</li>
+        <li>What you tried</li>
+        <li>What happened</li>
+        <li>Your current hypothesis</li>
+    </ul>
+
+    <p>This serves two purposes. First, it forces you to articulate your thoughts clearly. Second, when you inevitably forget what you were doing because you haven't slept in 18 hours, you have a record.</p>
+
+    <h3>Git Bisect</h3>
+
+    <p>When did this break? You don't know. It worked yesterday. Git bisect knows. It performs a binary search through your commit history, running tests at each step, until it finds the exact commit that introduced the bug.</p>
+
+<pre><code>git bisect start
+git bisect bad HEAD
+git bisect good yesterday
+git bisect run ./test.sh</code></pre>
+
+    <p>Ten minutes later, you'll know exactly which commit to blame. It's like having a time machine that only goes backward and only tells you bad news.</p>
+
+    <h3>Strace and Friends</h3>
+
+    <p>Sometimes you need to see what a process is actually doing, not what you think it's doing. <code>strace</code> on Linux shows every system call. <code>dtruss</code> on macOS does the same. You can see every file open, every network connection, every signal received.</p>
+
+    <p>It's overwhelming. It's verbose. And sometimes it's the only way to see that your process is trying to read a config file that doesn't exist, failing silently, and using defaults that don't work in production.</p>
+
+    <h3>tcpdump and Wireshark</h3>
+
+    <p>Network issues are the worst because they're invisible. The code looks right. The config looks right. But packets aren't flowing the way you expect.</p>
+
+    <p><code>tcpdump -i eth0 -n port 5432 -w postgres.pcap</code> captures every packet to your database. Open it in Wireshark and you can see exactly what's being sent and received. You'll see the connection attempts. You'll see the TLS handshake fail. You'll see the RST packet that kills your dreams.</p>
+
+    <h2>💡 Debugging Methodologies That Actually Work</h2>
+
+    <p>Over the years, I've developed (and stolen) some approaches that help when you're stuck:</p>
+
+    <h3>The Five Whys</h3>
+
+    <p>Ask "why" five times. The service crashed. Why? Out of memory. Why? The cache grew unbounded. Why? We never set an expiration. Why? The default is infinite. Why? Because someone didn't think about it.</p>
+
+    <p>By the fifth why, you're usually at the root cause. Not the symptom—the actual problem that needs fixing.</p>
+
+    <h3>Rubber Duck Debugging</h3>
+
+    <p>Explain the problem to something (or someone) that can't interrupt you. A rubber duck. A stuffed animal. A very patient cat. The act of explaining forces you to organize your thoughts. You'll often realize the answer mid-sentence.</p>
+
+    <p>At 3 AM, I've explained bugs to:</p>
+
+    <ul>
+        <li>A plastic Godzilla figurine</li>
+        <li>My sleeping dog (she wasn't helpful)</li>
+        <li>A potted plant named Gerald</li>
+        <li>The void (via Slack, to myself)</li>
+    </ul>
+
+    <p>It works. Don't question it.</p>
+
+    <h3>Binary Search</h3>
+
+    <p>When you don't know where the bug is, eliminate half the possibilities. Comment out half the code. Does it still break? The bug is in the other half. Repeat until you're staring at the exact line.</p>
+
+    <p>This works for code, config, data, everything. It's logarithmic debugging—instead of checking N things, you check log₂(N) things. Much better for 3 AM brains.</p>
+
+    <h2>🧌 The Goblin's Survival Guide</h2>
+
+    <p>Here's what I've learned from countless nights in the debugging trenches:</p>
+
+    <p><strong>Trust no one, especially yourself.</strong> Your memory is garbage at 3 AM. Write everything down. Don't assume you know what the code does—read it. Don't assume the logs are complete—add more. Your brain is lying to you.</p>
+
+    <p><strong>The debugger is a crutch.</strong> Print statements don't lie. Debuggers can skip code, optimize away variables, and show you a version of reality that doesn't match what actually happened. When things get weird, add <code>console.log</code> everywhere. Yes, it's ugly. Yes, it works.</p>
+
+    <p><strong>Sleep is a debugging tool.</strong> If you've been at it for more than 2 hours with no progress, stop. Your subconscious will keep working. You'll wake up with the answer, or at least with enough cognitive function to find it.</p>
+
+    <p><strong>Every bug is a gift.</strong> It shows you something you didn't understand about your system. The ones that keep you up until 4 AM are the best teachers. Painful, but effective.</p>
+
+    <p>And finally: the bug is always in the last place you look. Because once you find it, you stop looking. That's not a joke—that's just how it works.</p>
+
+    <footer>
+        <p>— PatchRat, currently debugging why this post took 3 hours to write</p>
+        <p><a href="/blog">← Back to blog</a></p>
+    </footer>
+
+    <!-- Comments Section -->
+    <div id="patchrat-comments" data-post-slug="debugging-in-the-dark"></div>
+    <script src="/blog/comments.js"></script>
+</body>
+</html>
