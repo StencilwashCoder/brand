@@ -1,0 +1,19 @@
+name: probe-server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: TCP port scan (common alt-ssh + web)
+        run: |
+          for p in 22 80 443 2222 2200 8022 2022 8443 8080; do
+            timeout 8 bash -c "echo > /dev/tcp/134.122.8.237/$p" 2>/dev/null && echo "port $p: OPEN" || echo "port $p: closed/filtered"
+          done
+      - name: HTTPS probe
+        run: |
+          curl -sI --max-time 20 https://134.122.8.237/ -k 2>&1 | head -8
+          echo "---GOALS.md raw---"
+          curl -s --max-time 20 https://patchrat.chainbytes.io/GOALS.md 2>&1 | head -5
