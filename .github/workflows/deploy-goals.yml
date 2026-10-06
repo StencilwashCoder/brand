@@ -1,0 +1,35 @@
+name: deploy-goals
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'GOALS.md'
+      - '.github/workflows/deploy-goals.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 134.122.8.237 >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Sync GOALS.md to web server
+        run: |
+          scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new GOALS.md root@134.122.8.237:/var/www/patchrat.chainbytes.io/GOALS.md
+
+      - name: Regenerate goals page on server
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new root@134.122.8.237 "cd /var/www/patchrat.chainbytes.io && python3 generate-goals.py && cp goals.html goals/index.html && echo DEPLOY_OK"
+
+      - name: Verify
+        run: |
+          sleep 3
+          curl -sSf --max-time 30 https://patchrat.chainbytes.io/GOALS.md | head -3
